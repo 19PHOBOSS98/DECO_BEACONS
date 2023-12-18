@@ -147,7 +147,7 @@ public class OmniBeaconBlockEntity extends DecoBeaconBlockEntity {
         this.prevBeamDirection = new Vec3f(prevBeamDirection.getX(),prevBeamDirection.getY(),prevBeamDirection.getZ());
     }
 
-    public static int maxBeamLength = 512;
+    public static int maxBeamLength = 100;
 
     //every tick a new segment is made
     public static void tick(World world, BlockPos beaconPos, BlockState beaconState, OmniBeaconBlockEntity beaconEntity) {
@@ -186,7 +186,7 @@ public class OmniBeaconBlockEntity extends DecoBeaconBlockEntity {
 
         }
 
-        for(int b=0; b<250 && beaconPos.getSquaredDistance(blockPos)<maxBeamLength*maxBeamLength ;++b)
+        for(int b=0; b<maxBeamLength && beaconPos.getSquaredDistance(blockPos)<maxBeamLength*maxBeamLength ;++b)
         {
             BlockState blockState = world.getBlockState(blockPos);
             BlockEntity blockEntity = world.getBlockEntity(blockPos);
@@ -235,7 +235,7 @@ public class OmniBeaconBlockEntity extends DecoBeaconBlockEntity {
         if(beamsIsComplete){
             beaconEntity.prevColorID = curColorID - 1;// just to trigger reinitialization
             if (!opaqueBlockDetected && !beaconEntity.omniSegmentsBuffer.isEmpty()){
-                beaconEntity.omniSegmentsBuffer.get(beaconEntity.omniSegmentsBuffer.size()-1).overrideHeight(1024);
+                //beaconEntity.omniSegmentsBuffer.get(beaconEntity.omniSegmentsBuffer.size()-1).overrideHeight(1024);
             }
             beaconEntity.omniBeamSegments = beaconEntity.omniSegmentsBuffer;
             if (!world.isClient) {
@@ -256,6 +256,9 @@ public class OmniBeaconBlockEntity extends DecoBeaconBlockEntity {
 
 
     }
+
+
+
     public static class OmniBeamSegment {
         final float[] color;
         public float height;
