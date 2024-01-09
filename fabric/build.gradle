@@ -53,6 +53,8 @@ dependencies {
     //implementation("org.anarres:jcpp:1.4.14")
     //modLocalRuntime("maven.modrinth:YL57xq9U:ogIRhnAJ") //https://modrinth.com/mod/iris/version/1.6.11+1.18.2
     //modLocalRuntime("maven.modrinth:AANobbMI:74Y5Z8fo") //https://modrinth.com/mod/sodium/version/mc1.18.2-0.4.1
+
+    modRuntimeOnly "maven.modrinth:nELKzJ5C:RbIlcuU7" //https://modrinth.com/mod/open-simple-frames/version/RbIlcuU7
 }
 
 processResources {
