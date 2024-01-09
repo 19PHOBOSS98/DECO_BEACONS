@@ -9,7 +9,7 @@ import net.phoboss.decobeacon.blocks.decobeacon.DecoBeaconBlockEntity;
 public class DecoBeaconBlockEntityImpl extends DecoBeaconBlockEntity implements IForgeBlockEntity {
 
 
-    public DecoBeaconBlockEntityImpl(BlockPos pos, BlockState state,Boolean isGhost) {
+    public DecoBeaconBlockEntityImpl(BlockPos pos, BlockState state, Boolean isGhost) {
         super(pos, state, isGhost);
     }
 
@@ -28,6 +28,6 @@ public class DecoBeaconBlockEntityImpl extends DecoBeaconBlockEntity implements 
     @Override
     public Box getRenderBoundingBox() {
         BlockPos pos = this.getPos();
-        return new Box(pos,pos.add(1,this.getDecoBeamSegmentsTotalHeight(),1));
+        return new Box(pos,pos.add(1,this.getBeamSegmentsTotalHeight(),1));
     }
 }

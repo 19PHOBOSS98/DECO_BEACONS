@@ -158,7 +158,7 @@ public class DecoBeaconBlockEntity extends BlockEntity {
         this.decoBeamSegments = decoBeamSegments;
     }
 
-    public int getDecoBeamSegmentsTotalHeight(){
+    public int getBeamSegmentsTotalHeight(){
         int totalHeight = 0;
         for (DecoBeamSegment segment:getDecoBeamSegments()) {
             totalHeight += segment.getHeight();

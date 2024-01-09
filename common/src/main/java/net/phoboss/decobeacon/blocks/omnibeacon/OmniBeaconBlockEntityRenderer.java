@@ -23,18 +23,18 @@ public class OmniBeaconBlockEntityRenderer implements BlockEntityRenderer<OmniBe
         }
 
         long l = entity.getWorld().getTime();
-        List<OmniBeaconBlockEntity.OmniBeamSegment> list = entity.getOmniBeamSegments();
+        List<DecoBeaconBlockEntity.DecoBeamSegment> list = entity.getOmniBeamSegments();
         if(list.isEmpty()){
             return;
         }
         float k = 0;
 
-        OmniBeaconBlockEntity.OmniBeamSegment omniBeamSegment = (OmniBeaconBlockEntity.OmniBeamSegment)list.get(0);
+        DecoBeaconBlockEntity.DecoBeamSegment omniBeamSegment = (DecoBeaconBlockEntity.DecoBeamSegment)list.get(0);
         renderBeam(matrices, vertexConsumers, tickDelta, l, k, list.size() == 1 ? omniBeamSegment.getHeight() : omniBeamSegment.getHeight()-0.5f, omniBeamSegment.getColor(),entity.getBeamDirection());
         k += omniBeamSegment.getHeight()-0.5f;
 
         for(int m = 1; m < list.size(); ++m) {
-            omniBeamSegment = (OmniBeaconBlockEntity.OmniBeamSegment)list.get(m);
+            omniBeamSegment = (DecoBeaconBlockEntity.DecoBeamSegment)list.get(m);
             renderBeam(matrices, vertexConsumers, tickDelta, l, k,
                     m == list.size() - 1 ? omniBeamSegment.getHeight()+0.5f : omniBeamSegment.getHeight(), omniBeamSegment.getColor(),entity.getBeamDirection());
             k += omniBeamSegment.getHeight();

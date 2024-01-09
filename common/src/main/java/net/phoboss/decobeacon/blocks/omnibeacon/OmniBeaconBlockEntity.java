@@ -15,7 +15,6 @@ import net.minecraft.util.DyeColor;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3f;
 import net.minecraft.util.math.Vec3i;
-import net.minecraft.world.Heightmap;
 import net.minecraft.world.World;
 import net.phoboss.decobeacon.blocks.ModBlockEntities;
 import net.phoboss.decobeacon.blocks.decobeacon.DecoBeaconBlock;
@@ -33,7 +32,14 @@ public class OmniBeaconBlockEntity extends DecoBeaconBlockEntity {
         super(ModBlockEntities.OMNI_BEACON.get(), pos, state,isGhost); //DO NOT FORGET TO CHECK THE BLOCK TYPE!!! YOU WILL GO CRAZY TRYING TO FIGURE OUT WHY THE BLOCK DOESN'T CALL THE TICK METHOD
     }
 
-
+    @Override
+    public int getBeamSegmentsTotalHeight() {
+        int totalHeight = 0;
+        for (DecoBeamSegment segment:getOmniBeamSegments()) {
+            totalHeight += segment.getHeight();
+        }
+        return totalHeight;
+    }
 
     @ExpectPlatform
     public static OmniBeaconBlockEntity createPlatformSpecific(BlockPos pos, BlockState state, Boolean isGhost){
@@ -101,23 +107,23 @@ public class OmniBeaconBlockEntity extends DecoBeaconBlockEntity {
         this.prevY = world.getBottomY() - 1;
     }
 
-    public List<OmniBeamSegment> omniSegmentsBuffer = Lists.<OmniBeamSegment>newArrayList();
+    public List<DecoBeamSegment> omniSegmentsBuffer = Lists.newArrayList();
 
-    public List<OmniBeamSegment> getOmniSegmentsBuffer() {
+    public List<DecoBeamSegment> getOmniSegmentsBuffer() {
         return this.omniSegmentsBuffer;
     }
 
-    public void setOmniSegmentsBuffer(List<OmniBeamSegment> omniSegmentsBuffer) {
+    public void setOmniSegmentsBuffer(List<DecoBeamSegment> omniSegmentsBuffer) {
         this.omniSegmentsBuffer = omniSegmentsBuffer;
     }
 
-    public List<OmniBeamSegment> omniBeamSegments = Lists.<OmniBeamSegment>newArrayList();
+    public List<DecoBeamSegment> omniBeamSegments = Lists.newArrayList();
 
-    public List<OmniBeamSegment> getOmniBeamSegments() {
+    public List<DecoBeamSegment> getOmniBeamSegments() {
         return omniBeamSegments;
     }
 
-    public void setOmniBeamSegments(List<OmniBeamSegment> omniBeamSegments) {
+    public void setOmniBeamSegments(List<DecoBeamSegment> omniBeamSegments) {
         this.omniBeamSegments = omniBeamSegments;
     }
 
@@ -147,7 +153,7 @@ public class OmniBeaconBlockEntity extends DecoBeaconBlockEntity {
         this.prevBeamDirection = new Vec3f(prevBeamDirection.getX(),prevBeamDirection.getY(),prevBeamDirection.getZ());
     }
 
-    public static int maxBeamLength = 100;
+    private static int maxBeamLength = 512;
 
     //every tick a new segment is made
     public static void tick(World world, BlockPos beaconPos, BlockState beaconState, OmniBeaconBlockEntity beaconEntity) {
@@ -173,13 +179,13 @@ public class OmniBeaconBlockEntity extends DecoBeaconBlockEntity {
             beaconEntity.omniSegmentsBuffer.clear();
         }
 
-        OmniBeaconBlockEntity.OmniBeamSegment omniBeamSegment = beaconEntity.omniSegmentsBuffer.isEmpty()
+        DecoBeamSegment omniBeamSegment = beaconEntity.omniSegmentsBuffer.isEmpty()
                 ? null
                 : beaconEntity.omniSegmentsBuffer.get(beaconEntity.omniSegmentsBuffer.size() - 1);
 
         //init buffer
         if (beaconEntity.omniSegmentsBuffer.isEmpty()) {
-            omniBeamSegment = new OmniBeamSegment(DyeColor.byId(beaconState.get(DecoBeaconBlock.COLOR)).getColorComponents());
+            omniBeamSegment = new DecoBeamSegment(DyeColor.byId(beaconState.get(DecoBeaconBlock.COLOR)).getColorComponents());
             beaconEntity.omniSegmentsBuffer.add(omniBeamSegment);
             beaconEntity.setPrevBlockPos(beaconPos);
             blockPos = beaconPos.add(curDirectionInt);
@@ -201,7 +207,7 @@ public class OmniBeaconBlockEntity extends DecoBeaconBlockEntity {
                                 opaqueBlockDetected = true;
                                 break;
                             }else{// if selected block is a ghost beacon then keep previous segment color
-                                colorMultiplier = omniBeamSegment.color;
+                                colorMultiplier = omniBeamSegment.getColor();
                             }
                         }
                     }
@@ -212,7 +218,7 @@ public class OmniBeaconBlockEntity extends DecoBeaconBlockEntity {
                     omniBeamSegment.increaseHeight();
                 } else {
                     //else start new segment
-                    omniBeamSegment = new OmniBeamSegment(new float[]{
+                    omniBeamSegment = new DecoBeamSegment(new float[]{
                             (omniBeamSegment.getColor()[0] + colorMultiplier[0]) / 2.0F,
                             (omniBeamSegment.getColor()[1] + colorMultiplier[1]) / 2.0F,
                             (omniBeamSegment.getColor()[2] + colorMultiplier[2]) / 2.0F});
@@ -251,37 +257,6 @@ public class OmniBeaconBlockEntity extends DecoBeaconBlockEntity {
                     }
                 }
             }
-        }
-
-
-
-    }
-
-
-
-    public static class OmniBeamSegment {
-        final float[] color;
-        public float height;
-
-        public OmniBeamSegment(float[] color) {
-            this.color = color;
-            this.height = 1f;
-        }
-
-        public void increaseHeight() {
-            ++this.height;
-        }
-
-        public void overrideHeight(int newHeight) {
-            this.height = newHeight;
-        }
-
-        public float[] getColor() {
-            return this.color;
-        }
-
-        public float getHeight() {
-            return this.height;
         }
     }
 }
