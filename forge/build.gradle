@@ -36,6 +36,7 @@ repositories {
             includeGroup "curse.maven"
         }
     }
+    maven { url "https://maven.shedaniel.me/" }
     mavenCentral()
 }
 
@@ -47,6 +48,8 @@ dependencies {
     common(project(path: ":common", configuration: "namedElements")) { transitive false }
     shadowCommon(project(path: ":common", configuration: "transformProductionForge")) { transitive = false }
 
+    modApi "me.shedaniel.cloth:cloth-config-forge:6.5.102"
+
     //still need to figure out why it keeps looking for META_INF/version
     //modRuntimeOnly "org.valkyrienskies:valkyrienskies-118-forge:${rootProject.vs2_version}"
     //modRuntimeOnly "thedarkcolour:kotlinforforge:${rootProject.forge_kotlin_version}"
@@ -54,8 +57,9 @@ dependencies {
     //modRuntimeOnly "curse.maven:vs2-258371:4794551"
 
     modRuntimeOnly "curse.maven:oculus-581495:4578744"
-    modRuntimeOnly "curse.maven:rubidium-574856:4494903"
-    //modRuntimeOnly "curse.maven:embedium-908741:4949961"
+    //modRuntimeOnly "curse.maven:rubidium-574856:4494903"
+    modRuntimeOnly "curse.maven:embedium-908741:4949961"
+    modRuntimeOnly "curse.maven:framedblocks-441647:4567924"
 }
 
 processResources {
