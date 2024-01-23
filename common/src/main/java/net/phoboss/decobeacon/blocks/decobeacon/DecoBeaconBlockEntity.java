@@ -27,12 +27,6 @@ import java.util.List;
 
 public class DecoBeaconBlockEntity extends BlockEntity {
 
-    private boolean isGhost = false;
-
-    public boolean isGhost() {
-        return this.isGhost;
-    }
-
     public DecoBeaconBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.DECO_BEACON.get(), pos, state);
     }
@@ -51,10 +45,6 @@ public class DecoBeaconBlockEntity extends BlockEntity {
         this.isGhost = isGhost;
     }
 
-
-
-
-
     @ExpectPlatform
     public static DecoBeaconBlockEntity createPlatformSpecific(BlockPos pos, BlockState state,Boolean isGhost){
         throw new AssertionError();
@@ -64,10 +54,43 @@ public class DecoBeaconBlockEntity extends BlockEntity {
     public static DecoBeaconBlockEntity createPlatformSpecific(BlockPos pos, BlockState state){
         throw new AssertionError();
     }
+    public static class DecoBeamSegment {
+        final float[] color;
+        private int height;
 
+        public DecoBeamSegment(float[] color) {
+            this.color = color;
+            this.height = 1;
+        }
+
+        public void increaseHeight() {
+            ++this.height;
+        }
+
+        public void overrideHeight(int newHeight) {
+            this.height = newHeight;
+        }
+
+        public float[] getColor() {
+            return this.color;
+        }
+
+        public int getHeight() {
+            return this.height;
+        }
+    }
+    private boolean isGhost = false;
     private boolean activeLow = false;
-
     private boolean isTransparent = true;
+    public int prevY;
+    public int prevColorID = 0;
+    public boolean wasPowered = false;
+    public List<DecoBeamSegment> segmentsBuffer = Lists.<DecoBeamSegment>newArrayList();
+    public List<DecoBeamSegment> decoBeamSegments = Lists.<DecoBeamSegment>newArrayList();
+
+    public boolean isGhost() {
+        return this.isGhost;
+    }
 
     public boolean isActiveLow(){
         return this.activeLow;
@@ -86,6 +109,34 @@ public class DecoBeaconBlockEntity extends BlockEntity {
         this.isTransparent = transparent;
         markDirty();
     }
+
+    public List<DecoBeamSegment> getDecoBeamSegments() {
+        return decoBeamSegments;
+    }
+
+    public int getBeamSegmentsTotalHeight(){
+        int totalHeight = 0;
+        for (DecoBeamSegment segment:getDecoBeamSegments()) {
+            totalHeight += segment.getHeight();
+        }
+        return totalHeight;
+    }
+
+    public boolean wasPowered() {
+        return wasPowered;
+    }
+
+    public void setWasPowered(boolean wasPowered) {
+        this.wasPowered = wasPowered;
+    }
+
+    public boolean isPowered() {
+        boolean active = getWorld().isReceivingRedstonePower(getPos());
+        //active = this.getCachedState().get(OmniBeaconBlock.ACTIVE_LOW) != active;
+        active = this.isActiveLow() != active;
+        return active;
+    }
+
 
     @Override
     protected void writeNbt(NbtCompound nbt) {
@@ -116,75 +167,6 @@ public class DecoBeaconBlockEntity extends BlockEntity {
     public void markDirty() {
         world.updateListeners(getPos(), getCachedState(), getCachedState(), Block.NOTIFY_ALL);
         super.markDirty();
-    }
-
-    public int prevY;
-
-    public int getPrevY() {
-        return prevY;
-    }
-
-    public void setPrevY(int prevY) {
-        this.prevY = prevY;
-    }
-
-    public List<DecoBeamSegment> segmentsBuffer = Lists.<DecoBeamSegment>newArrayList();
-
-    public List<DecoBeamSegment> getSegmentsBuffer() {
-        return segmentsBuffer;
-    }
-
-    public void setSegmentsBuffer(List<DecoBeamSegment> segmentsBuffer) {
-        this.segmentsBuffer = segmentsBuffer;
-    }
-
-    public int prevColorID = 0;
-
-    public int getPrevColorID() {
-        return prevColorID;
-    }
-
-    public void setPrevColorID(int prevColorID) {
-        this.prevColorID = prevColorID;
-    }
-
-    public List<DecoBeamSegment> decoBeamSegments = Lists.<DecoBeamSegment>newArrayList();
-
-    public List<DecoBeamSegment> getDecoBeamSegments() {
-        return decoBeamSegments;
-    }
-
-    public void setDecoBeamSegments(List<DecoBeamSegment> decoBeamSegments) {
-        this.decoBeamSegments = decoBeamSegments;
-    }
-
-    public int getBeamSegmentsTotalHeight(){
-        int totalHeight = 0;
-        for (DecoBeamSegment segment:getDecoBeamSegments()) {
-            totalHeight += segment.getHeight();
-        }
-        return totalHeight;
-    }
-
-    public boolean wasPowered = false;
-
-    public boolean wasPowered() {
-        return wasPowered;
-    }
-
-    public void setWasPowered(boolean wasPowered) {
-        this.wasPowered = wasPowered;
-    }
-
-
-
-    public boolean isPowered() {
-        World world = this.getWorld();
-        BlockPos pos = this.getPos();
-        boolean active = world.isReceivingRedstonePower(pos);
-        //active = this.getCachedState().get(OmniBeaconBlock.ACTIVE_LOW) != active;
-        active = this.isActiveLow() != active;
-        return active;
     }
 
     public static void tick(World world, BlockPos pos, BlockState state, DecoBeaconBlockEntity entity) {
@@ -333,35 +315,5 @@ public class DecoBeaconBlockEntity extends BlockEntity {
     public void setWorld(World world) {
         super.setWorld(world);
         this.prevY = world.getBottomY() - 1;
-    }
-
-
-
-
-
-    public static class DecoBeamSegment {
-        final float[] color;
-        private int height;
-
-        public DecoBeamSegment(float[] color) {
-            this.color = color;
-            this.height = 1;
-        }
-
-        public void increaseHeight() {
-            ++this.height;
-        }
-
-        public void overrideHeight(int newHeight) {
-            this.height = newHeight;
-        }
-
-        public float[] getColor() {
-            return this.color;
-        }
-
-        public int getHeight() {
-            return this.height;
-        }
     }
 }

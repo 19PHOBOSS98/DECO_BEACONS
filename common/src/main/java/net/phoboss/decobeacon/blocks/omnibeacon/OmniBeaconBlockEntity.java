@@ -32,15 +32,6 @@ public class OmniBeaconBlockEntity extends DecoBeaconBlockEntity {
         super(ModBlockEntities.OMNI_BEACON.get(), pos, state,isGhost); //DO NOT FORGET TO CHECK THE BLOCK TYPE!!! YOU WILL GO CRAZY TRYING TO FIGURE OUT WHY THE BLOCK DOESN'T CALL THE TICK METHOD
     }
 
-    @Override
-    public int getBeamSegmentsTotalHeight() {
-        int totalHeight = 0;
-        for (DecoBeamSegment segment:getOmniBeamSegments()) {
-            totalHeight += segment.getHeight();
-        }
-        return totalHeight;
-    }
-
     @ExpectPlatform
     public static OmniBeaconBlockEntity createPlatformSpecific(BlockPos pos, BlockState state, Boolean isGhost){
         throw new AssertionError();
@@ -51,7 +42,14 @@ public class OmniBeaconBlockEntity extends DecoBeaconBlockEntity {
         throw new AssertionError();
     }
 
+    private int maxBeamLength = 512;
     private Vec3f beamDirection = new Vec3f(0,1,0);
+    public List<DecoBeamSegment> omniSegmentsBuffer = Lists.newArrayList();
+    public List<DecoBeamSegment> omniBeamSegments = Lists.newArrayList();
+    public BlockPos prevBlockPos = getPos();
+    public Vec3f prevBeamDirection = getBeamDirection();
+
+
     public Vec3f getBeamDirection() {
         return this.beamDirection;
     }
@@ -62,98 +60,55 @@ public class OmniBeaconBlockEntity extends DecoBeaconBlockEntity {
         this.beamDirection = beamDirection;
         markDirty();
     }
-    public void setBeamDirection(Vec3i beamDirection) { // :`(
-        this.beamDirection = new Vec3f(beamDirection.getX(),beamDirection.getY(),beamDirection.getZ());
+    public List<DecoBeamSegment> getOmniBeamSegments() {
+        return omniBeamSegments;
+    }
+    public BlockPos getPrevBlockPos() {
+        return this.prevBlockPos;
+    }
+    public void setPrevBlockPos(BlockPos prevBlockPos) {
+        this.prevBlockPos = prevBlockPos;
+    }
+    public Vec3i getPrevBeamDirectionInt() {
+        return new Vec3i(this.prevBeamDirection.getX(),this.prevBeamDirection.getY(),this.prevBeamDirection.getZ());
+    }
+    public void setPrevBeamDirection(Vec3i prevBeamDirection) {
+        this.prevBeamDirection = new Vec3f(prevBeamDirection.getX(),prevBeamDirection.getY(),prevBeamDirection.getZ());
+    }
+    public int getMaxBeamLength() {
+        return maxBeamLength;
+    }
+    public void setMaxBeamLength(int maxBeamLength) {
+        this.maxBeamLength = maxBeamLength;
         markDirty();
     }
+    public int getMaxBeamLengthSquared() {
+        return maxBeamLength*maxBeamLength;
+    }
 
+    @Override
+    public int getBeamSegmentsTotalHeight() {
+        int totalHeight = 0;
+        for (DecoBeamSegment segment:getOmniBeamSegments()) {
+            totalHeight += segment.getHeight();
+        }
+        return totalHeight;
+    }
     @Override
     protected void writeNbt(NbtCompound nbt) {
         Vec3f beamDir = getBeamDirection();
         nbt.putFloat("beamDirectionX",beamDir.getX());
         nbt.putFloat("beamDirectionY",beamDir.getY());
         nbt.putFloat("beamDirectionZ",beamDir.getZ());
+        nbt.putInt("maxBeamLength",this.maxBeamLength);
         super.writeNbt(nbt);
     }
-
     @Override
     public void readNbt(NbtCompound nbt) {
         super.readNbt(nbt);
         this.beamDirection = new Vec3f(nbt.getFloat("beamDirectionX"),nbt.getFloat("beamDirectionY"),nbt.getFloat("beamDirectionZ"));
+        this.maxBeamLength = nbt.getInt("maxBeamLength");
     }
-
-    @Nullable
-    @Override
-    public Packet<ClientPlayPacketListener> toUpdatePacket() {
-        return BlockEntityUpdateS2CPacket.create(this);
-    }
-
-    @Override
-    public NbtCompound toInitialChunkDataNbt() {
-        return createNbt();
-    }
-
-    @Override
-    public void markDirty() {
-        world.updateListeners(getPos(), getCachedState(), getCachedState(), Block.NOTIFY_ALL);
-        super.markDirty();
-    }
-
-
-
-    @Override
-    public void setWorld(World world) {
-        super.setWorld(world);
-        this.prevY = world.getBottomY() - 1;
-    }
-
-    public List<DecoBeamSegment> omniSegmentsBuffer = Lists.newArrayList();
-
-    public List<DecoBeamSegment> getOmniSegmentsBuffer() {
-        return this.omniSegmentsBuffer;
-    }
-
-    public void setOmniSegmentsBuffer(List<DecoBeamSegment> omniSegmentsBuffer) {
-        this.omniSegmentsBuffer = omniSegmentsBuffer;
-    }
-
-    public List<DecoBeamSegment> omniBeamSegments = Lists.newArrayList();
-
-    public List<DecoBeamSegment> getOmniBeamSegments() {
-        return omniBeamSegments;
-    }
-
-    public void setOmniBeamSegments(List<DecoBeamSegment> omniBeamSegments) {
-        this.omniBeamSegments = omniBeamSegments;
-    }
-
-    public BlockPos prevBlockPos = getPos();
-
-    public BlockPos getPrevBlockPos() {
-        return this.prevBlockPos;
-    }
-
-    public void setPrevBlockPos(BlockPos prevBlockPos) {
-        this.prevBlockPos = prevBlockPos;
-    }
-
-    public Vec3f prevBeamDirection = getBeamDirection();
-
-    public Vec3f getPrevBeamDirection() {
-        return this.prevBeamDirection;
-    }
-    public Vec3i getPrevBeamDirectionInt() {
-        return new Vec3i(this.prevBeamDirection.getX(),this.prevBeamDirection.getY(),this.prevBeamDirection.getZ());
-    }
-    public void setPrevBeamDirection(Vec3f prevBeamDirection) {
-        this.prevBeamDirection = prevBeamDirection;
-    }
-
-    public void setPrevBeamDirection(Vec3i prevBeamDirection) {
-        this.prevBeamDirection = new Vec3f(prevBeamDirection.getX(),prevBeamDirection.getY(),prevBeamDirection.getZ());
-    }
-
-    private static int maxBeamLength = 512;
 
     //every tick a new segment is made
     public static void tick(World world, BlockPos beaconPos, BlockState beaconState, OmniBeaconBlockEntity beaconEntity) {
@@ -161,9 +116,9 @@ public class OmniBeaconBlockEntity extends DecoBeaconBlockEntity {
         boolean opaqueBlockDetected = false;
         boolean isPowered = beaconEntity.isPowered();
         boolean passThruSolid = beaconEntity.isGhost();
-        Vec3f curDirection = beaconEntity.getBeamDirection();
         Vec3i curDirectionInt = beaconEntity.getBeamDirectionInt();
-
+        int maxLength = beaconEntity.getMaxBeamLength();
+        int maxLength2 = beaconEntity.getMaxBeamLengthSquared();
         BlockPos blockPos = beaconEntity.getPrevBlockPos().add(curDirectionInt);
 
 
@@ -192,7 +147,7 @@ public class OmniBeaconBlockEntity extends DecoBeaconBlockEntity {
 
         }
 
-        for(int b=0; b<maxBeamLength && beaconPos.getSquaredDistance(blockPos)<maxBeamLength*maxBeamLength ;++b)
+        for(int b=0; b<maxLength && beaconPos.getSquaredDistance(blockPos)<maxLength2 ;++b)
         {
             BlockState blockState = world.getBlockState(blockPos);
             BlockEntity blockEntity = world.getBlockEntity(blockPos);
@@ -203,7 +158,7 @@ public class OmniBeaconBlockEntity extends DecoBeaconBlockEntity {
                     if(blockEntity instanceof DecoBeaconBlockEntity be){
                         if(!be.isTransparent()){ // if selected block is not a transparent beacon...
                             if(!be.isGhost()) { // if selected block is not a ghost beacon then end beam at this position
-                                beaconEntity.prevBlockPos = beaconPos.add(curDirectionInt.multiply(maxBeamLength*maxBeamLength));
+                                beaconEntity.prevBlockPos = beaconPos.add(curDirectionInt.multiply(maxLength2));
                                 opaqueBlockDetected = true;
                                 break;
                             }else{// if selected block is a ghost beacon then keep previous segment color
@@ -226,7 +181,7 @@ public class OmniBeaconBlockEntity extends DecoBeaconBlockEntity {
                 }
             } else {
                 if (blockState.getOpacity(world, blockPos) >= 15 && !passThruSolid) {
-                    beaconEntity.prevBlockPos = beaconPos.add(curDirectionInt.multiply(maxBeamLength*maxBeamLength));
+                    beaconEntity.prevBlockPos = beaconPos.add(curDirectionInt.multiply(maxLength2));
                     opaqueBlockDetected = true;
                     break;
                 }
@@ -237,7 +192,7 @@ public class OmniBeaconBlockEntity extends DecoBeaconBlockEntity {
         }
 
         opaqueBlockDetected = !passThruSolid && opaqueBlockDetected;
-        boolean beamsIsComplete = beaconPos.getSquaredDistance(blockPos)>=maxBeamLength*maxBeamLength || opaqueBlockDetected;
+        boolean beamsIsComplete = beaconPos.getSquaredDistance(blockPos)>=maxLength2 || opaqueBlockDetected;
         if(beamsIsComplete){
             beaconEntity.prevColorID = curColorID - 1;// just to trigger reinitialization
             if (!opaqueBlockDetected && !beaconEntity.omniSegmentsBuffer.isEmpty()){

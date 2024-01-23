@@ -11,7 +11,6 @@ import java.util.List;
 
 public class DecoBeaconBlockEntityRenderer implements BlockEntityRenderer<DecoBeaconBlockEntity> {
     public static final Identifier BEAM_TEXTURE = new Identifier("textures/entity/beacon_beam.png");
-    public static final int MAX_BEAM_HEIGHT = 1024;
     public DecoBeaconBlockEntityRenderer(BlockEntityRendererFactory.Context ctx) {
     }
 
@@ -26,7 +25,7 @@ public class DecoBeaconBlockEntityRenderer implements BlockEntityRenderer<DecoBe
         int k = 0;
 
         for(int m = 0; m < list.size(); ++m) {
-            DecoBeaconBlockEntity.DecoBeamSegment decoBeamSegment = (DecoBeaconBlockEntity.DecoBeamSegment)list.get(m);
+            DecoBeaconBlockEntity.DecoBeamSegment decoBeamSegment = list.get(m);
             //renderBeam(matrices, vertexConsumers, tickDelta, l, k, m == list.size() - 1 ? 1024 : decoBeamSegment.getHeight(), decoBeamSegment.getColor());
             renderBeam(matrices, vertexConsumers, tickDelta, l, k, decoBeamSegment.getHeight(), decoBeamSegment.getColor());
             k += decoBeamSegment.getHeight();
