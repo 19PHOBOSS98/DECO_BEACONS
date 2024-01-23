@@ -14,5 +14,7 @@
   "block.decobeacon.ghost.tooltip.shift": "you can also pass thru it as well!",
 
   "block.decobeacon.omni_beacon.tooltip": "redirect beam (Press §eSHIFT§r)",
-  "block.decobeacon.omni_beacon.tooltip.shift": "right click with torch"
+  "block.decobeacon.omni_beacon.tooltip.shift": "right click with torch",
+  "empty_book_error_prompt": "the pages are empty...",
+  "invalid_page_entry": "might need to check on what you wrote..."
 }

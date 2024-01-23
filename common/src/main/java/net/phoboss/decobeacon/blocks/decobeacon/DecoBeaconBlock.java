@@ -51,6 +51,7 @@ public class DecoBeaconBlock extends BlockWithEntity implements BlockEntityProvi
         Item mainHandItem = player.getMainHandStack().getItem();
         if(hand == Hand.MAIN_HAND){
             if(!world.isClient()){
+                DecoBeaconBlockEntity blockEntity = (DecoBeaconBlockEntity) world.getBlockEntity(pos);
                 if(mainHandItem instanceof DyeItem itemDye){
                     world.setBlockState(pos,state.with(COLOR,itemDye.getColor().getId()),Block.NOTIFY_ALL);
                     return ActionResult.SUCCESS;
@@ -62,12 +63,10 @@ public class DecoBeaconBlock extends BlockWithEntity implements BlockEntityProvi
                     return ActionResult.SUCCESS;
 
                 }else if(mainHandItem == Items.REDSTONE_TORCH){
-                    DecoBeaconBlockEntity blockEntity = (DecoBeaconBlockEntity) world.getBlockEntity(pos);
                     blockEntity.setActiveLow(!blockEntity.isActiveLow());
                     return ActionResult.SUCCESS;
 
                 }else if(mainHandItem == Items.SOUL_TORCH){
-                    DecoBeaconBlockEntity blockEntity = (DecoBeaconBlockEntity) world.getBlockEntity(pos);
                     blockEntity.setTransparent(!blockEntity.isTransparent());
                     return ActionResult.SUCCESS;
 
@@ -75,23 +74,6 @@ public class DecoBeaconBlock extends BlockWithEntity implements BlockEntityProvi
             }
         }
         return ActionResult.PASS;
-    }
-
-    public ItemStack getPickStack(BlockView world, BlockPos pos, BlockState state) {
-        ItemStack itemStack = super.getPickStack(world, pos, state);
-
-        NbtCompound nbtCompound = new NbtCompound();
-
-        if (state.get(COLOR) != null) {
-            nbtCompound.putString(COLOR.getName(), String.valueOf(state.get(COLOR)));
-        }
-        if (state.get(Properties.LIT) != null) {
-            nbtCompound.putString(Properties.LIT.getName(), String.valueOf(state.get(Properties.LIT)));
-        }
-
-        itemStack.setSubNbt("BlockStateTag", nbtCompound);
-
-        return itemStack;
     }
 
     @Override

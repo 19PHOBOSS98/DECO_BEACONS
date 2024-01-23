@@ -2,6 +2,7 @@ package net.phoboss.decobeacon.blocks.decobeacon;
 
 import com.google.common.collect.Lists;
 import dev.architectury.injectables.annotations.ExpectPlatform;
+import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Stainable;
@@ -16,32 +17,39 @@ import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.DyeColor;
+import net.minecraft.util.Util;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.World;
+import net.phoboss.decobeacon.DecoBeacon;
 import net.phoboss.decobeacon.blocks.ModBlockEntities;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class DecoBeaconBlockEntity extends BlockEntity {
 
     public DecoBeaconBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.DECO_BEACON.get(), pos, state);
+        this.bookSettings = this.setupBookSettings();
     }
 
     public DecoBeaconBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
+        this.bookSettings = this.setupBookSettings();
     }
 
     public DecoBeaconBlockEntity(BlockPos pos, BlockState state,Boolean isGhost) {
         this(pos, state);
         this.isGhost = isGhost;
+
     }
 
     public DecoBeaconBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state,Boolean isGhost) {
-        super(type, pos, state);
+        this(type, pos, state);
         this.isGhost = isGhost;
     }
 
@@ -85,8 +93,16 @@ public class DecoBeaconBlockEntity extends BlockEntity {
     public int prevY;
     public int prevColorID = 0;
     public boolean wasPowered = false;
-    public List<DecoBeamSegment> segmentsBuffer = Lists.<DecoBeamSegment>newArrayList();
-    public List<DecoBeamSegment> decoBeamSegments = Lists.<DecoBeamSegment>newArrayList();
+    public List<DecoBeamSegment> segmentsBuffer = Lists.newArrayList();
+    public List<DecoBeamSegment> decoBeamSegments = Lists.newArrayList();
+
+    public Object2ObjectLinkedOpenHashMap<String,String> bookSettings;
+
+    public Object2ObjectLinkedOpenHashMap<String,String> setupBookSettings(){
+        Object2ObjectLinkedOpenHashMap<String,String> map = new Object2ObjectLinkedOpenHashMap();
+        map.put("color","white");//DyeColor names (i.e. red,blue,lime)
+        return map;
+    }
 
     public boolean isGhost() {
         return this.isGhost;
@@ -142,14 +158,21 @@ public class DecoBeaconBlockEntity extends BlockEntity {
     protected void writeNbt(NbtCompound nbt) {
         nbt.putBoolean("activeLow",isActiveLow());
         nbt.putBoolean("isTransparent",isTransparent());
+        nbt.putInt("color",world.getBlockState(getPos()).get(DecoBeaconBlock.COLOR));
         super.writeNbt(nbt);
     }
 
     @Override
     public void readNbt(NbtCompound nbt) {
-        super.readNbt(nbt);
-        this.activeLow = nbt.getBoolean("activeLow");
-        this.isTransparent = nbt.getBoolean("isTransparent");
+        try {
+            super.readNbt(nbt);
+            this.activeLow = nbt.getBoolean("activeLow");
+            this.isTransparent = nbt.getBoolean("isTransparent");
+            int color = nbt.getInt("color");
+            this.bookSettings.put("color",DyeColor.byId(color).getName());
+        }catch(Exception e){
+            DecoBeacon.LOGGER.error("Error on DecoBeacon readNbt(...):",e);
+        }
     }
 
     @Nullable

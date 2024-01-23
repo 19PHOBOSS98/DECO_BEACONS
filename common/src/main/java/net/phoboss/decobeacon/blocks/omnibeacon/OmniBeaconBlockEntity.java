@@ -2,6 +2,7 @@ package net.phoboss.decobeacon.blocks.omnibeacon;
 
 import com.google.common.collect.Lists;
 import dev.architectury.injectables.annotations.ExpectPlatform;
+import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
@@ -12,10 +13,13 @@ import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.DyeColor;
+import net.minecraft.util.Util;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3f;
 import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.World;
+import net.phoboss.decobeacon.DecoBeacon;
 import net.phoboss.decobeacon.blocks.ModBlockEntities;
 import net.phoboss.decobeacon.blocks.decobeacon.DecoBeaconBlock;
 import net.phoboss.decobeacon.blocks.decobeacon.DecoBeaconBlockEntity;
@@ -49,6 +53,13 @@ public class OmniBeaconBlockEntity extends DecoBeaconBlockEntity {
     public BlockPos prevBlockPos = getPos();
     public Vec3f prevBeamDirection = getBeamDirection();
 
+    @Override
+    public Object2ObjectLinkedOpenHashMap<String, String> setupBookSettings() {
+        Object2ObjectLinkedOpenHashMap<String,String> map = super.setupBookSettings();
+        map.put("maxBeamLength","512");
+        map.put("direction","u");//u/d/n/s/e/w
+        return map;
+    }
 
     public Vec3f getBeamDirection() {
         return this.beamDirection;
@@ -105,9 +116,19 @@ public class OmniBeaconBlockEntity extends DecoBeaconBlockEntity {
     }
     @Override
     public void readNbt(NbtCompound nbt) {
-        super.readNbt(nbt);
-        this.beamDirection = new Vec3f(nbt.getFloat("beamDirectionX"),nbt.getFloat("beamDirectionY"),nbt.getFloat("beamDirectionZ"));
-        this.maxBeamLength = nbt.getInt("maxBeamLength");
+        try {
+            super.readNbt(nbt);
+            this.beamDirection = new Vec3f(nbt.getFloat("beamDirectionX"), nbt.getFloat("beamDirectionY"), nbt.getFloat("beamDirectionZ"));
+            this.maxBeamLength = nbt.getInt("maxBeamLength");//make sure all fields are initialized properly. this was missing and caused the game to freeze on "Saving worlds" without logs
+            this.bookSettings.put("maxBeamLength", Integer.toString(this.maxBeamLength));
+            this.bookSettings.put("direction",
+                    Direction.fromVector(
+                            (int) this.beamDirection.getX(),
+                            (int) this.beamDirection.getY(),
+                            (int) this.beamDirection.getZ()).getName().substring(0, 1));
+        }catch(Exception e){
+            DecoBeacon.LOGGER.error("Error on OmniBeacon readNbt(...):",e);
+        }
     }
 
     //every tick a new segment is made
