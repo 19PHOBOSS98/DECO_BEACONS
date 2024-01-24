@@ -70,6 +70,11 @@ public class OmniBeaconBlockEntity extends DecoBeaconBlockEntity {
     }
     public void setBeamDirection(Vec3f beamDirection) {
         this.beamDirection = beamDirection;
+        this.bookSettings.put("direction",
+                Direction.fromVector(
+                        (int) beamDirection.getX(),
+                        (int) beamDirection.getY(),
+                        (int) beamDirection.getZ()).getName());
         markDirty();
     }
     public List<DecoBeamSegment> getOmniBeamSegments() {
@@ -92,6 +97,7 @@ public class OmniBeaconBlockEntity extends DecoBeaconBlockEntity {
     }
     public void setMaxBeamLength(int maxBeamLength) {
         this.maxBeamLength = maxBeamLength;
+        this.bookSettings.put("maxBeamLength", Integer.toString(maxBeamLength));
         markDirty();
     }
     public int getMaxBeamLengthSquared() {
@@ -121,6 +127,7 @@ public class OmniBeaconBlockEntity extends DecoBeaconBlockEntity {
             super.readNbt(nbt);
             this.beamDirection = new Vec3f(nbt.getFloat("beamDirectionX"), nbt.getFloat("beamDirectionY"), nbt.getFloat("beamDirectionZ"));
             this.maxBeamLength = nbt.getInt("maxBeamLength");//make sure all fields are initialized properly. this was missing and caused the game to freeze on "Saving worlds" without logs
+
             this.bookSettings.put("maxBeamLength", Integer.toString(this.maxBeamLength));
             this.bookSettings.put("direction",
                     Direction.fromVector(

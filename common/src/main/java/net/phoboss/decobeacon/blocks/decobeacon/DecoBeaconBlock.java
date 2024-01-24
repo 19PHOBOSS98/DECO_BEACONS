@@ -60,15 +60,12 @@ public class DecoBeaconBlock extends BlockWithEntity implements BlockEntityProvi
             if(!world.isClient()){
                 DecoBeaconBlockEntity blockEntity = (DecoBeaconBlockEntity) world.getBlockEntity(pos);
                 if(mainHandItem instanceof DyeItem itemDye){
-                    int colorId = itemDye.getColor().getId();
-                    blockEntity.bookSettings.put("color",DyeColor.byId(colorId).getName());
                     blockEntity.setCurColorID(itemDye.getColor().getId());
                     return ActionResult.SUCCESS;
 
                 }else if(mainHandItem == Items.AIR){
                     int delta = player.isSneaking() ? -1 : 1;
                     int currentColor = Math.floorMod((state.get(COLOR) + delta),16);
-                    blockEntity.bookSettings.put("color",DyeColor.byId(currentColor).getName());
                     blockEntity.setCurColorID(currentColor);
                     return ActionResult.SUCCESS;
 
@@ -76,7 +73,7 @@ public class DecoBeaconBlock extends BlockWithEntity implements BlockEntityProvi
                     blockEntity.setActiveLow(!blockEntity.isActiveLow());
                     return ActionResult.SUCCESS;
 
-                }else if(mainHandItem == Items.SOUL_TORCH){
+                }else if(mainHandItem == Items.COAL){
                     blockEntity.setTransparent(!blockEntity.isTransparent());
                     return ActionResult.SUCCESS;
 
@@ -94,7 +91,8 @@ public class DecoBeaconBlock extends BlockWithEntity implements BlockEntityProvi
 
     public void refreshBlockEntityBookSettings(BlockState blockState,
                                                DecoBeaconBlockEntity blockEntity){
-        blockEntity.bookSettings.put("color",DyeColor.byId(blockState.get(COLOR)).getName());
+        blockEntity.bookSettings.put("color",DyeColor.byId(blockEntity.getCurColorID()).getName());
+        blockEntity.bookSettings.put("isTransparent",Boolean.toString(blockEntity.isTransparent()));
         blockEntity.bookSettings.put("activeLow",Boolean.toString(blockEntity.isActiveLow()));
     }
     @Override
@@ -198,12 +196,13 @@ public class DecoBeaconBlock extends BlockWithEntity implements BlockEntityProvi
                                                 Map<String,String> bookSettings){
         String color = bookSettings.get("color");
         String activeLow = bookSettings.get("activeLow");
+        String isTransparent = bookSettings.get("isTransparent");
         try{
             if(!color.isEmpty()) {
                 color = color.toLowerCase();
                 //int colorID = DyeColor.byName(color, DyeColor.WHITE).getId();//this doesn't cause an error when it fails
                 int colorID = COLOR_NAME_DICTIONARY.get(color).getId();//I need it to cause an error when it fails
-                world.setBlockState(pos, state.with(COLOR, colorID), Block.NOTIFY_ALL);
+                blockEntity.setCurColorID(colorID);
             }
         }catch(Exception e){
             return onError(e,world,pos,player,"color:"+color);
@@ -215,6 +214,14 @@ public class DecoBeaconBlock extends BlockWithEntity implements BlockEntityProvi
             }
         }catch(Exception e){
             return onError(e,world,pos,player,"activeLow:"+activeLow);
+        }
+
+        try{
+            if(!isTransparent.isEmpty()) {
+                blockEntity.setTransparent(Boolean.parseBoolean(isTransparent));
+            }
+        }catch(Exception e){
+            return onError(e,world,pos,player,"isTransparent:"+isTransparent);
         }
 
         return ActionResult.SUCCESS;

@@ -17,7 +17,6 @@ import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.DyeColor;
-import net.minecraft.util.Util;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.World;
@@ -26,9 +25,7 @@ import net.phoboss.decobeacon.blocks.ModBlockEntities;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class DecoBeaconBlockEntity extends BlockEntity {
 
@@ -100,9 +97,10 @@ public class DecoBeaconBlockEntity extends BlockEntity {
     public Object2ObjectLinkedOpenHashMap<String,String> bookSettings;
 
     public Object2ObjectLinkedOpenHashMap<String,String> setupBookSettings(){
-        Object2ObjectLinkedOpenHashMap<String,String> map = new Object2ObjectLinkedOpenHashMap();
+        Object2ObjectLinkedOpenHashMap<String,String> map = new Object2ObjectLinkedOpenHashMap<>();
         map.put("color","white");//DyeColor names (i.e. red,blue,lime)
-        map.put("activeLow","true");
+        map.put("activeLow","false");
+        map.put("isTransparent","true");
         return map;
     }
     public int getCurColorID() {
@@ -110,6 +108,7 @@ public class DecoBeaconBlockEntity extends BlockEntity {
     }
     public void setCurColorID(int colorID) {
         this.curColorID = colorID;
+        this.bookSettings.put("color",DyeColor.byId(colorID).getName());
         markDirty();
     }
     public boolean isGhost() {
@@ -122,6 +121,7 @@ public class DecoBeaconBlockEntity extends BlockEntity {
 
     public void setActiveLow(boolean activeLow){
         this.activeLow = activeLow;
+        this.bookSettings.put("activeLow",Boolean.toString(activeLow));
         markDirty();
     }
 
@@ -131,6 +131,7 @@ public class DecoBeaconBlockEntity extends BlockEntity {
 
     public void setTransparent(boolean transparent) {
         this.isTransparent = transparent;
+        this.bookSettings.put("isTransparent",Boolean.toString(transparent));
         markDirty();
     }
 
@@ -155,9 +156,14 @@ public class DecoBeaconBlockEntity extends BlockEntity {
     }
 
     public boolean isPowered() {
-        boolean active = getWorld().isReceivingRedstonePower(getPos());
-        //active = this.getCachedState().get(OmniBeaconBlock.ACTIVE_LOW) != active;
-        active = this.isActiveLow() != active;
+        boolean active = false;
+        try {
+            active = getWorld().isReceivingRedstonePower(getPos());
+            //active = this.getCachedState().get(OmniBeaconBlock.ACTIVE_LOW) != active;
+            active = this.isActiveLow() != active;
+        }catch(Exception e){
+            DecoBeacon.LOGGER.error("Error on isPowered() method: ",e);
+        }
         return active;
     }
 
@@ -177,8 +183,10 @@ public class DecoBeaconBlockEntity extends BlockEntity {
             this.activeLow = nbt.getBoolean("activeLow");
             this.isTransparent = nbt.getBoolean("isTransparent");
             this.curColorID = nbt.getInt("color");
-            this.bookSettings.put("color",DyeColor.byId(this.curColorID).getName());
+
             this.bookSettings.put("activeLow",Boolean.toString(this.activeLow));
+            this.bookSettings.put("isTransparent",Boolean.toString(this.isTransparent));
+            this.bookSettings.put("color",DyeColor.byId(this.curColorID).getName());
         }catch(Exception e){
             DecoBeacon.LOGGER.error("Error on DecoBeacon readNbt(...):",e);
         }
@@ -197,8 +205,12 @@ public class DecoBeaconBlockEntity extends BlockEntity {
 
     @Override
     public void markDirty() {
-        world.updateListeners(getPos(), getCachedState(), getCachedState(), Block.NOTIFY_ALL);
-        super.markDirty();
+        try {
+            world.updateListeners(getPos(), getCachedState(), getCachedState(), Block.NOTIFY_ALL);
+            super.markDirty();
+        }catch (Exception e){
+            DecoBeacon.LOGGER.error("Error on markDirt() method: ",e);
+        }
     }
 
     public static void tick(World world, BlockPos pos, BlockState state, DecoBeaconBlockEntity entity) {
@@ -224,7 +236,7 @@ public class DecoBeaconBlockEntity extends BlockEntity {
 
         if (entity.prevY < j) {
             blockPos = pos;
-            entity.segmentsBuffer = Lists.<DecoBeamSegment>newArrayList();
+            entity.segmentsBuffer = Lists.newArrayList();
             entity.prevY = pos.getY() - 1;
         } else {
             blockPos = new BlockPos(i, entity.prevY + 1, k);
