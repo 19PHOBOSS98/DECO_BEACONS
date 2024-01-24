@@ -90,6 +90,7 @@ public class DecoBeaconBlockEntity extends BlockEntity {
     private boolean isGhost = false;
     private boolean activeLow = false;
     private boolean isTransparent = true;
+    private int curColorID = 0;
     public int prevY;
     public int prevColorID = 0;
     public boolean wasPowered = false;
@@ -101,9 +102,16 @@ public class DecoBeaconBlockEntity extends BlockEntity {
     public Object2ObjectLinkedOpenHashMap<String,String> setupBookSettings(){
         Object2ObjectLinkedOpenHashMap<String,String> map = new Object2ObjectLinkedOpenHashMap();
         map.put("color","white");//DyeColor names (i.e. red,blue,lime)
+        map.put("activeLow","true");
         return map;
     }
-
+    public int getCurColorID() {
+        return this.curColorID;
+    }
+    public void setCurColorID(int colorID) {
+        this.curColorID = colorID;
+        markDirty();
+    }
     public boolean isGhost() {
         return this.isGhost;
     }
@@ -158,7 +166,7 @@ public class DecoBeaconBlockEntity extends BlockEntity {
     protected void writeNbt(NbtCompound nbt) {
         nbt.putBoolean("activeLow",isActiveLow());
         nbt.putBoolean("isTransparent",isTransparent());
-        nbt.putInt("color",world.getBlockState(getPos()).get(DecoBeaconBlock.COLOR));
+        nbt.putInt("color",getCurColorID());
         super.writeNbt(nbt);
     }
 
@@ -168,8 +176,9 @@ public class DecoBeaconBlockEntity extends BlockEntity {
             super.readNbt(nbt);
             this.activeLow = nbt.getBoolean("activeLow");
             this.isTransparent = nbt.getBoolean("isTransparent");
-            int color = nbt.getInt("color");
-            this.bookSettings.put("color",DyeColor.byId(color).getName());
+            this.curColorID = nbt.getInt("color");
+            this.bookSettings.put("color",DyeColor.byId(this.curColorID).getName());
+            this.bookSettings.put("activeLow",Boolean.toString(this.activeLow));
         }catch(Exception e){
             DecoBeacon.LOGGER.error("Error on DecoBeacon readNbt(...):",e);
         }
@@ -195,12 +204,13 @@ public class DecoBeaconBlockEntity extends BlockEntity {
     public static void tick(World world, BlockPos pos, BlockState state, DecoBeaconBlockEntity entity) {
         boolean isPowered = entity.isPowered();
         boolean passThruSolid = entity.isGhost();
+        int curColorID = entity.getCurColorID();
 
         if(!world.isClient()){// note to self only update state properties in server-side
             world.setBlockState(pos,state.with(Properties.LIT,isPowered),Block.NOTIFY_ALL);
+            world.setBlockState(pos,state.with(DecoBeaconBlock.COLOR,curColorID),Block.NOTIFY_ALL);
         }
 
-        int curColorID = state.get(DecoBeaconBlock.COLOR);
         int i = pos.getX();
         int j = pos.getY();
         int k = pos.getZ();

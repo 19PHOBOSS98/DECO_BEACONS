@@ -7,13 +7,9 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.network.Packet;
-import net.minecraft.network.listener.ClientPlayPacketListener;
-import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.DyeColor;
-import net.minecraft.util.Util;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3f;
@@ -23,7 +19,6 @@ import net.phoboss.decobeacon.DecoBeacon;
 import net.phoboss.decobeacon.blocks.ModBlockEntities;
 import net.phoboss.decobeacon.blocks.decobeacon.DecoBeaconBlock;
 import net.phoboss.decobeacon.blocks.decobeacon.DecoBeaconBlockEntity;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
@@ -57,12 +52,18 @@ public class OmniBeaconBlockEntity extends DecoBeaconBlockEntity {
     public Object2ObjectLinkedOpenHashMap<String, String> setupBookSettings() {
         Object2ObjectLinkedOpenHashMap<String,String> map = super.setupBookSettings();
         map.put("maxBeamLength","512");
-        map.put("direction","u");//u/d/n/s/e/w
+        map.put("direction","up");//u/d/n/s/e/w
         return map;
     }
 
     public Vec3f getBeamDirection() {
         return this.beamDirection;
+    }
+    public String getBeamDirectionName() {
+        return Direction.fromVector(
+                (int)this.beamDirection.getX(),
+                (int)this.beamDirection.getY(),
+                (int)this.beamDirection.getZ()).getName();
     }
     public Vec3i getBeamDirectionInt() { //:`(
         return new Vec3i(this.beamDirection.getX(),this.beamDirection.getY(),this.beamDirection.getZ());
@@ -125,7 +126,7 @@ public class OmniBeaconBlockEntity extends DecoBeaconBlockEntity {
                     Direction.fromVector(
                             (int) this.beamDirection.getX(),
                             (int) this.beamDirection.getY(),
-                            (int) this.beamDirection.getZ()).getName().substring(0, 1));
+                            (int) this.beamDirection.getZ()).getName());
         }catch(Exception e){
             DecoBeacon.LOGGER.error("Error on OmniBeacon readNbt(...):",e);
         }
@@ -133,10 +134,11 @@ public class OmniBeaconBlockEntity extends DecoBeaconBlockEntity {
 
     //every tick a new segment is made
     public static void tick(World world, BlockPos beaconPos, BlockState beaconState, OmniBeaconBlockEntity beaconEntity) {
-        int curColorID = beaconState.get(DecoBeaconBlock.COLOR);
+
         boolean opaqueBlockDetected = false;
         boolean isPowered = beaconEntity.isPowered();
         boolean passThruSolid = beaconEntity.isGhost();
+        int curColorID = beaconEntity.getCurColorID();
         Vec3i curDirectionInt = beaconEntity.getBeamDirectionInt();
         int maxLength = beaconEntity.getMaxBeamLength();
         int maxLength2 = beaconEntity.getMaxBeamLengthSquared();
@@ -146,6 +148,7 @@ public class OmniBeaconBlockEntity extends DecoBeaconBlockEntity {
 
         if(!world.isClient()){// note to self only update state properties in server-side
             world.setBlockState(beaconPos,beaconState.with(Properties.LIT,isPowered),Block.NOTIFY_ALL);
+            world.setBlockState(beaconPos,beaconState.with(DecoBeaconBlock.COLOR,curColorID),Block.NOTIFY_ALL);
         }
 
         //if this beacon switched color or set direction changed then redo construction
