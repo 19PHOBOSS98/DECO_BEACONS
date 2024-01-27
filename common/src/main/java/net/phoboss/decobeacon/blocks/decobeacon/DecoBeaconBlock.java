@@ -46,7 +46,27 @@ public class DecoBeaconBlock extends BlockWithEntity implements BlockEntityProvi
                 .add(Properties.LIT);
     }
 
+    @Override
+    public BlockRenderType getRenderType(BlockState state) {
+        return BlockRenderType.MODEL;
+    }
 
+    @Nullable
+    @Override
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
+        return checkType(type, ModBlockEntities.DECO_BEACON.get(), DecoBeaconBlockEntity::tick);
+    }
+
+    @Override
+    public DyeColor getColor() {
+        return DyeColor.WHITE;
+    }
+
+    @Nullable
+    @Override
+    public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
+        return DecoBeaconBlockEntity.createPlatformSpecific(pos,state);
+    }
     @Override
     public ActionResult onUse(BlockState state,
                               World world,
@@ -59,6 +79,9 @@ public class DecoBeaconBlock extends BlockWithEntity implements BlockEntityProvi
         if(hand == Hand.MAIN_HAND){
             if(!world.isClient()){
                 DecoBeaconBlockEntity blockEntity = (DecoBeaconBlockEntity) world.getBlockEntity(pos);
+                if(blockEntity == null){
+                    return ActionResult.FAIL;
+                }
                 if(mainHandItem instanceof DyeItem itemDye){
                     blockEntity.setCurColorID(itemDye.getColor().getId());
                     return ActionResult.SUCCESS;
@@ -84,7 +107,9 @@ public class DecoBeaconBlock extends BlockWithEntity implements BlockEntityProvi
                     }
                     return result;
                 }
+
             }
+            return ActionResult.SUCCESS;
         }
         return ActionResult.PASS;
     }
@@ -95,29 +120,9 @@ public class DecoBeaconBlock extends BlockWithEntity implements BlockEntityProvi
         blockEntity.bookSettings.put("isTransparent",Boolean.toString(blockEntity.isTransparent()));
         blockEntity.bookSettings.put("activeLow",Boolean.toString(blockEntity.isActiveLow()));
     }
-    @Override
-    public BlockRenderType getRenderType(BlockState state) {
-        return BlockRenderType.MODEL;
-    }
 
-    @Nullable
-    @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        return checkType(type, ModBlockEntities.DECO_BEACON.get(), DecoBeaconBlockEntity::tick);
-    }
 
-    @Override
-    public DyeColor getColor() {
-        return DyeColor.WHITE;
-    }
-
-    @Nullable
-    @Override
-    public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
-        return DecoBeaconBlockEntity.createPlatformSpecific(pos,state);
-    }
-
-    public static Map<String, DyeColor> COLOR_NAME_DICTIONARY = Util.make(new Object2ObjectLinkedOpenHashMap(), (map) -> {
+    public static Map<String, DyeColor> COLOR_NAME_DICTIONARY = Util.make(new Object2ObjectLinkedOpenHashMap<>(), (map) -> {
         map.put("white",DyeColor.WHITE);
         map.put("orange",DyeColor.ORANGE);
         map.put("magenta",DyeColor.MAGENTA);
@@ -156,7 +161,7 @@ public class DecoBeaconBlock extends BlockWithEntity implements BlockEntityProvi
             String page = pagesNbt.getString(i);
             page = StringUtils.normalizeSpace(page);
             page = page.replace(" ","");
-            if(page==""){
+            if(page.isEmpty()){
                 continue;
             }
             String[] settings = page.split("[;]");
@@ -173,7 +178,9 @@ public class DecoBeaconBlock extends BlockWithEntity implements BlockEntityProvi
     public static NbtList readPages(ItemStack bookStack){
         if (!bookStack.isEmpty() && bookStack.hasNbt()) {
             NbtCompound bookNbt = bookStack.getNbt();
-            return bookNbt.getList("pages", 8).copy();
+            if(bookNbt.contains("pages")) {
+                return bookNbt.getList("pages", 8).copy();
+            }
         }
         return new NbtList();
     }
