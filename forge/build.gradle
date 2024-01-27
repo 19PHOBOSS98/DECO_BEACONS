@@ -71,6 +71,10 @@ dependencies {
     //modRuntimeOnly "curse.maven:rubidium-574856:4494903"
     modRuntimeOnly "curse.maven:embedium-908741:4949961"
     modRuntimeOnly "curse.maven:framedblocks-441647:4567924"
+
+    modRuntimeOnly "curse.maven:minemaresurection-596719:3831181"
+    modRuntimeOnly "curse.maven:cmdcam-251244:4426920"
+    modRuntimeOnly "curse.maven:creativecore-257814:4629846"
 }
 
 processResources {
