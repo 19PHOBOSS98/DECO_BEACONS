@@ -7,7 +7,7 @@ license = "MIT"
 modId = "decobeacon"
 version = "${version}"
 displayName = "Deco Beacon"
-authors = "Me!"
+authors = "PHOBOSS"
 description = '''
 This is an example description! Tell everyone what your mod is about!
 '''
