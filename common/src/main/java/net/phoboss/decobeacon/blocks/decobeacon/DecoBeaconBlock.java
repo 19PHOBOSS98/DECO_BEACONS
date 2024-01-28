@@ -27,14 +27,33 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.phoboss.decobeacon.DecoBeacon;
 import net.phoboss.decobeacon.blocks.ModBlockEntities;
+import net.phoboss.decobeacon.utility.BookSettingsUtility;
+import net.phoboss.decobeacon.utility.ErrorResponse;
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
 
-public class DecoBeaconBlock extends BlockWithEntity implements BlockEntityProvider, Stainable  {
+public class DecoBeaconBlock extends BlockWithEntity implements BlockEntityProvider, Stainable, BookSettingsUtility {
     public static final IntProperty COLOR = IntProperty.of("color",0,15);
-
+    public static Map<String, DyeColor> COLOR_NAME_DICTIONARY = Util.make(new Object2ObjectLinkedOpenHashMap<>(), (map) -> {
+        map.put("white",DyeColor.WHITE);
+        map.put("orange",DyeColor.ORANGE);
+        map.put("magenta",DyeColor.MAGENTA);
+        map.put("light_blue",DyeColor.LIGHT_BLUE);
+        map.put("yellow",DyeColor.YELLOW);
+        map.put("lime",DyeColor.LIME);
+        map.put("pink",DyeColor.PINK);
+        map.put("gray",DyeColor.GRAY);
+        map.put("light_gray",DyeColor.LIGHT_GRAY);
+        map.put("cyan",DyeColor.CYAN);
+        map.put("purple",DyeColor.PURPLE);
+        map.put("blue",DyeColor.BLUE);
+        map.put("brown",DyeColor.BROWN);
+        map.put("green",DyeColor.GREEN);
+        map.put("red",DyeColor.RED);
+        map.put("black",DyeColor.BLACK);
+    });
     public DecoBeaconBlock(Settings settings) {
         super(settings);
         this.setDefaultState(getDefaultState().with(COLOR, 0).with(Properties.LIT, false));
@@ -104,7 +123,7 @@ public class DecoBeaconBlock extends BlockWithEntity implements BlockEntityProvi
                 return ActionResult.SUCCESS;
 
             }else if(mainHandItemStack.hasNbt() && mainHandItemStack.getNbt().contains("pages")){
-                ActionResult result = executeBookProtocol(mainHandItemStack,state,world,pos,player,blockEntity);
+                ActionResult result = executeBookProtocol(mainHandItemStack,state,world,pos,player,blockEntity,blockEntity.bookSettings);
                 if(result == ActionResult.FAIL){
                     refreshBlockEntityBookSettings(state,blockEntity);
                 }
@@ -114,35 +133,58 @@ public class DecoBeaconBlock extends BlockWithEntity implements BlockEntityProvi
         return ActionResult.PASS;
     }
 
-    public void refreshBlockEntityBookSettings(BlockState blockState,
-                                               DecoBeaconBlockEntity blockEntity){
-        blockEntity.bookSettings.put("color",DyeColor.byId(blockEntity.getCurColorID()).getName());
-        blockEntity.bookSettings.put("isTransparent",Boolean.toString(blockEntity.isTransparent()));
-        blockEntity.bookSettings.put("activeLow",Boolean.toString(blockEntity.isActiveLow()));
+
+    @Override
+    public ActionResult implementBookSettings(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockEntity blockEntity, Map<String, String> bookSettings) {
+        DecoBeaconBlockEntity decoBeaconBlockEntity = (DecoBeaconBlockEntity)blockEntity;
+
+        String color = bookSettings.get("color");
+        String activeLow = bookSettings.get("activeLow");
+        String isTransparent = bookSettings.get("isTransparent");
+        try{
+            if(!color.isEmpty()) {
+                color = color.toLowerCase();
+                //int colorID = DyeColor.byName(color, DyeColor.WHITE).getId();//this doesn't cause an error when it fails
+                int colorID = COLOR_NAME_DICTIONARY.get(color).getId();//I need it to cause an error when it fails
+                decoBeaconBlockEntity.setCurColorID(colorID);
+            }
+        }catch(Exception e){
+            DecoBeacon.LOGGER.error("Error: ", e);
+            return ErrorResponse.onErrorActionResult(world,pos,player,"color:"+color);
+        }
+
+        try{
+            if(!activeLow.isEmpty()) {
+                decoBeaconBlockEntity.setActiveLow(Boolean.parseBoolean(activeLow));
+            }
+        }catch(Exception e){
+            DecoBeacon.LOGGER.error("Error: ", e);
+            return ErrorResponse.onErrorActionResult(world,pos,player,"activeLow:"+activeLow);
+        }
+
+        try{
+            if(!isTransparent.isEmpty()) {
+                decoBeaconBlockEntity.setTransparent(Boolean.parseBoolean(isTransparent));
+            }
+        }catch(Exception e){
+            DecoBeacon.LOGGER.error("Error: ", e);
+            return ErrorResponse.onErrorActionResult(world,pos,player,"isTransparent:"+isTransparent);
+        }
+
+        return ActionResult.SUCCESS;
     }
 
+    @Override
+    public void refreshBlockEntityBookSettings(BlockState blockState, BlockEntity blockEntity) {
+        if(blockEntity instanceof DecoBeaconBlockEntity decoBeaconBlockEntity) {
+            decoBeaconBlockEntity.bookSettings.put("color", DyeColor.byId(decoBeaconBlockEntity.getCurColorID()).getName());
+            decoBeaconBlockEntity.bookSettings.put("isTransparent", Boolean.toString(decoBeaconBlockEntity.isTransparent()));
+            decoBeaconBlockEntity.bookSettings.put("activeLow", Boolean.toString(decoBeaconBlockEntity.isActiveLow()));
+        }
+    }
 
-    public static Map<String, DyeColor> COLOR_NAME_DICTIONARY = Util.make(new Object2ObjectLinkedOpenHashMap<>(), (map) -> {
-        map.put("white",DyeColor.WHITE);
-        map.put("orange",DyeColor.ORANGE);
-        map.put("magenta",DyeColor.MAGENTA);
-        map.put("light_blue",DyeColor.LIGHT_BLUE);
-        map.put("yellow",DyeColor.YELLOW);
-        map.put("lime",DyeColor.LIME);
-        map.put("pink",DyeColor.PINK);
-        map.put("gray",DyeColor.GRAY);
-        map.put("light_gray",DyeColor.LIGHT_GRAY);
-        map.put("cyan",DyeColor.CYAN);
-        map.put("purple",DyeColor.PURPLE);
-        map.put("blue",DyeColor.BLUE);
-        map.put("brown",DyeColor.BROWN);
-        map.put("green",DyeColor.GREEN);
-        map.put("red",DyeColor.RED);
-        map.put("black",DyeColor.BLACK);
-    });
-
-    public static void parsePages(NbtList pagesNbt, Map<String,String> bookSettings){
-        /*  //example//
+    /*public static void parsePages(NbtList pagesNbt, Map<String,String> bookSettings){
+        *//*  //example//
             maxLength:int;
             direction:U/D/N/S/E/W;
             color:DyeColor names (i.e. red,blue,lime);
@@ -156,7 +198,7 @@ public class DecoBeaconBlock extends BlockWithEntity implements BlockEntityProvi
             scheme1,
             scheme2,
             scheme3;
-         */
+         *//*
         for(int i=0; i<pagesNbt.size(); ++i) {
             String page = pagesNbt.getString(i);
             page = StringUtils.normalizeSpace(page);
@@ -184,17 +226,6 @@ public class DecoBeaconBlock extends BlockWithEntity implements BlockEntityProvi
         }
         return new NbtList();
     }
-    public static ActionResult onError(Exception e,
-                                       World world,
-                                       BlockPos pos,
-                                       PlayerEntity player,
-                                       String field){
-        DecoBeacon.LOGGER.error("Book Parsing Error: ",e);
-        DecoBeaconBlockEntity.playSound(world, pos, SoundEvents.ENTITY_LIGHTNING_BOLT_THUNDER);
-        player.sendMessage(new TranslatableText("invalid_page_entry"),false);
-        player.sendMessage(new LiteralText(field),false);
-        return ActionResult.FAIL;
-    }
     public ActionResult implementBookSettings(  BlockState state,
                                                 World world,
                                                 BlockPos pos,
@@ -212,7 +243,9 @@ public class DecoBeaconBlock extends BlockWithEntity implements BlockEntityProvi
                 blockEntity.setCurColorID(colorID);
             }
         }catch(Exception e){
-            return onError(e,world,pos,player,"color:"+color);
+            //return onError(e,world,pos,player,"color:"+color);
+            DecoBeacon.LOGGER.error("Error: ", e);
+            return ErrorResponse.onErrorActionResult(world,pos,player,"color:"+color);
         }
 
         try{
@@ -220,7 +253,9 @@ public class DecoBeaconBlock extends BlockWithEntity implements BlockEntityProvi
                 blockEntity.setActiveLow(Boolean.parseBoolean(activeLow));
             }
         }catch(Exception e){
-            return onError(e,world,pos,player,"activeLow:"+activeLow);
+            //return onError(e,world,pos,player,"activeLow:"+activeLow);
+            DecoBeacon.LOGGER.error("Error: ", e);
+            return ErrorResponse.onErrorActionResult(world,pos,player,"activeLow:"+activeLow);
         }
 
         try{
@@ -228,7 +263,9 @@ public class DecoBeaconBlock extends BlockWithEntity implements BlockEntityProvi
                 blockEntity.setTransparent(Boolean.parseBoolean(isTransparent));
             }
         }catch(Exception e){
-            return onError(e,world,pos,player,"isTransparent:"+isTransparent);
+            //return onError(e,world,pos,player,"isTransparent:"+isTransparent);
+            DecoBeacon.LOGGER.error("Error: ", e);
+            return ErrorResponse.onErrorActionResult(world,pos,player,"isTransparent:"+isTransparent);
         }
 
         return ActionResult.SUCCESS;
@@ -249,10 +286,16 @@ public class DecoBeaconBlock extends BlockWithEntity implements BlockEntityProvi
         try {
             parsePages(pagesNbt, blockEntity.bookSettings);
         }catch(Exception e){
-            return onError(e,world,pos,player,"unrecognized settings...");
+            DecoBeacon.LOGGER.error("Error: ", e);
+            return ErrorResponse.onErrorActionResult(world,pos,player,"unrecognized settings...");
         }
 
         return implementBookSettings(state, world, pos, player, blockEntity,blockEntity.bookSettings);
     }
-
+    public void refreshBlockEntityBookSettings(BlockState blockState,
+                                               DecoBeaconBlockEntity blockEntity){
+        blockEntity.bookSettings.put("color",DyeColor.byId(blockEntity.getCurColorID()).getName());
+        blockEntity.bookSettings.put("isTransparent",Boolean.toString(blockEntity.isTransparent()));
+        blockEntity.bookSettings.put("activeLow",Boolean.toString(blockEntity.isActiveLow()));
+    }*/
 }

@@ -15,9 +15,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3f;
 import net.minecraft.world.World;
+import net.phoboss.decobeacon.DecoBeacon;
 import net.phoboss.decobeacon.blocks.ModBlockEntities;
 import net.phoboss.decobeacon.blocks.decobeacon.DecoBeaconBlock;
 import net.phoboss.decobeacon.blocks.decobeacon.DecoBeaconBlockEntity;
+import net.phoboss.decobeacon.utility.ErrorResponse;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
@@ -52,7 +54,7 @@ public class OmniBeaconBlock extends DecoBeaconBlock {
 
         ItemStack mainHandItemStack = player.getMainHandStack();
         Item mainHandItem = mainHandItemStack.getItem();
-        
+
         if(hand == Hand.MAIN_HAND){
             if(world.isClient()){
                 return ActionResult.SUCCESS;
@@ -81,7 +83,7 @@ public class OmniBeaconBlock extends DecoBeaconBlock {
                                                 World world,
                                                 BlockPos pos,
                                                 PlayerEntity player,
-                                                DecoBeaconBlockEntity blockEntity,
+                                                BlockEntity blockEntity,
                                                 Map<String,String> bookSettings){
         ActionResult result = super.implementBookSettings(  state,
                                                             world,
@@ -102,7 +104,9 @@ public class OmniBeaconBlock extends DecoBeaconBlock {
                     omniBeaconBlockEntity.setMaxBeamLength(maxLength);
                 }
             } catch (Exception e) {
-                return onError(e, world, pos, player, "maxBeamLength:"+maxLengthStr);
+                //return onError(e, world, pos, player, "maxBeamLength:"+maxLengthStr);
+                DecoBeacon.LOGGER.error("Error: ", e);
+                return ErrorResponse.onErrorActionResult(world,pos,player,"maxBeamLength:"+maxLengthStr);
             }
 
             try {
@@ -112,7 +116,9 @@ public class OmniBeaconBlock extends DecoBeaconBlock {
                     omniBeaconBlockEntity.setBeamDirection(beamDirection);
                 }
             } catch (Exception e) {
-                return onError(e, world, pos, player, "direction:"+direction);
+                //return onError(e, world, pos, player, "direction:"+direction);
+                DecoBeacon.LOGGER.error("Error: ", e);
+                return ErrorResponse.onErrorActionResult(world,pos,player,"direction:"+direction);
             }
         }
         return ActionResult.SUCCESS;
@@ -120,7 +126,7 @@ public class OmniBeaconBlock extends DecoBeaconBlock {
 
     @Override
     public void refreshBlockEntityBookSettings(BlockState blockState,
-                                               DecoBeaconBlockEntity blockEntity){
+                                               BlockEntity blockEntity){
         super.refreshBlockEntityBookSettings(blockState,blockEntity);
         if(blockEntity instanceof OmniBeaconBlockEntity omni){
             omni.bookSettings.put("direction",omni.getBeamDirectionName());
