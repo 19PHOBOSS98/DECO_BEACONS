@@ -50,25 +50,22 @@ public class OmniBeaconBlock extends DecoBeaconBlock {
                               BlockHitResult hit) {
         ActionResult result = super.onUse(state,world,pos,player,hand,hit);
 
-        if(result != ActionResult.PASS){
-            return result;
-        }
-
         ItemStack mainHandItemStack = player.getMainHandStack();
         Item mainHandItem = mainHandItemStack.getItem();
+        
         if(hand == Hand.MAIN_HAND){
-            if(!world.isClient()){
-                OmniBeaconBlockEntity blockEntity = (OmniBeaconBlockEntity) world.getBlockEntity(pos);
-                if(mainHandItem == Items.TORCH){
-                    Direction side = hit.getSide();
-                    blockEntity.bookSettings.put("direction",side.getName());
-                    blockEntity.setBeamDirection(side.getUnitVector());
-                    return ActionResult.SUCCESS;
-                }
+            if(world.isClient()){
+                return ActionResult.SUCCESS;
             }
-
+            OmniBeaconBlockEntity blockEntity = (OmniBeaconBlockEntity) world.getBlockEntity(pos);
+            if(mainHandItem == Items.TORCH){
+                Direction side = hit.getSide();
+                blockEntity.bookSettings.put("direction",side.getName());
+                blockEntity.setBeamDirection(side.getUnitVector());
+                return ActionResult.SUCCESS;
+            }
         }
-        return ActionResult.PASS;
+        return result;
     }
     public static Map<String, Direction> BEAM_DIRECTION_DICTIONARY = Util.make(new Object2ObjectLinkedOpenHashMap(), (map) -> {
         map.put("up",Direction.UP);

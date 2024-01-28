@@ -77,39 +77,39 @@ public class DecoBeaconBlock extends BlockWithEntity implements BlockEntityProvi
         ItemStack mainHandItemStack = player.getMainHandStack();
         Item mainHandItem = mainHandItemStack.getItem();
         if(hand == Hand.MAIN_HAND){
-            if(!world.isClient()){
-                DecoBeaconBlockEntity blockEntity = (DecoBeaconBlockEntity) world.getBlockEntity(pos);
-                if(blockEntity == null){
-                    return ActionResult.FAIL;
-                }
-                if(mainHandItem instanceof DyeItem itemDye){
-                    blockEntity.setCurColorID(itemDye.getColor().getId());
-                    return ActionResult.SUCCESS;
-
-                }else if(mainHandItem == Items.AIR){
-                    int delta = player.isSneaking() ? -1 : 1;
-                    int currentColor = Math.floorMod((state.get(COLOR) + delta),16);
-                    blockEntity.setCurColorID(currentColor);
-                    return ActionResult.SUCCESS;
-
-                }else if(mainHandItem == Items.REDSTONE_TORCH){
-                    blockEntity.setActiveLow(!blockEntity.isActiveLow());
-                    return ActionResult.SUCCESS;
-
-                }else if(mainHandItem == Items.COAL){
-                    blockEntity.setTransparent(!blockEntity.isTransparent());
-                    return ActionResult.SUCCESS;
-
-                }else if(mainHandItemStack.hasNbt() && mainHandItemStack.getNbt().contains("pages")){
-                    ActionResult result = executeBookProtocol(mainHandItemStack,state,world,pos,player,blockEntity);
-                    if(result == ActionResult.FAIL){
-                        refreshBlockEntityBookSettings(state,blockEntity);
-                    }
-                    return result;
-                }
-
+            if(world.isClient()){
+                return ActionResult.SUCCESS;
             }
-            return ActionResult.SUCCESS;
+
+            DecoBeaconBlockEntity blockEntity = (DecoBeaconBlockEntity) world.getBlockEntity(pos);
+            if(blockEntity == null){
+                return ActionResult.FAIL;
+            }
+            if(mainHandItem instanceof DyeItem itemDye){
+                blockEntity.setCurColorID(itemDye.getColor().getId());
+                return ActionResult.SUCCESS;
+
+            }else if(mainHandItem == Items.AIR){
+                int delta = player.isSneaking() ? -1 : 1;
+                int currentColor = Math.floorMod((state.get(COLOR) + delta),16);
+                blockEntity.setCurColorID(currentColor);
+                return ActionResult.SUCCESS;
+
+            }else if(mainHandItem == Items.REDSTONE_TORCH){
+                blockEntity.setActiveLow(!blockEntity.isActiveLow());
+                return ActionResult.SUCCESS;
+
+            }else if(mainHandItem == Items.COAL){
+                blockEntity.setTransparent(!blockEntity.isTransparent());
+                return ActionResult.SUCCESS;
+
+            }else if(mainHandItemStack.hasNbt() && mainHandItemStack.getNbt().contains("pages")){
+                ActionResult result = executeBookProtocol(mainHandItemStack,state,world,pos,player,blockEntity);
+                if(result == ActionResult.FAIL){
+                    refreshBlockEntityBookSettings(state,blockEntity);
+                }
+                return result;
+            }
         }
         return ActionResult.PASS;
     }
