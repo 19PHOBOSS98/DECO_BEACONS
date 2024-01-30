@@ -106,7 +106,7 @@ public class OmniBeaconBlock extends DecoBeaconBlock {
             } catch (Exception e) {
                 //return onError(e, world, pos, player, "maxBeamLength:"+maxLengthStr);
                 DecoBeacon.LOGGER.error("Error: ", e);
-                return ErrorResponse.onErrorActionResult(world,pos,player,"maxBeamLength:"+maxLengthStr);
+                return ErrorResponse.onErrorActionResult(world,pos,player,"Unrecognized value: maxBeamLength:"+maxLengthStr);
             }
 
             try {
@@ -118,7 +118,7 @@ public class OmniBeaconBlock extends DecoBeaconBlock {
             } catch (Exception e) {
                 //return onError(e, world, pos, player, "direction:"+direction);
                 DecoBeacon.LOGGER.error("Error: ", e);
-                return ErrorResponse.onErrorActionResult(world,pos,player,"direction:"+direction);
+                return ErrorResponse.onErrorActionResult(world,pos,player,"Unrecognized value: direction:"+direction);
             }
         }
         return ActionResult.SUCCESS;

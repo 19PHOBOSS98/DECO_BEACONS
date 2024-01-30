@@ -9,9 +9,7 @@ import net.minecraft.world.World;
 
 public interface ErrorResponse {
     static ActionResult onErrorActionResult(World world,BlockPos pos,PlayerEntity player,String field){
-        if(!world.isClient()) {
-            onError(world,pos,player,field);
-        }
+        onError(world,pos,player,field);
         return ActionResult.FAIL;
     }
     static void onError(World world,BlockPos pos,PlayerEntity player,String field){

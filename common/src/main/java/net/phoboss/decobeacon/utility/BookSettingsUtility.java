@@ -1,5 +1,10 @@
 package net.phoboss.decobeacon.utility;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.reflect.TypeToken;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -15,6 +20,7 @@ import net.minecraft.world.World;
 import net.phoboss.decobeacon.DecoBeacon;
 import org.apache.commons.lang3.StringUtils;
 
+import java.lang.reflect.Type;
 import java.util.Map;
 
 public interface BookSettingsUtility {
@@ -27,39 +33,32 @@ public interface BookSettingsUtility {
         }
         return new NbtList();
     }
-    static void parsePages(NbtList pagesNbt, Map<String,String> bookSettings){
-        /*  //example//
-            maxLength:int;
-            direction:U/D/N/S/E/W;
-            color:DyeColor names (i.e. red,blue,lime);
-
-            moveX:int;
-            moveY:int;
-            moveZ:int;
-            mirror:FB/LR;
-            rotate:90/180/270;
-            files:
-            scheme1,
-            scheme2,
-            scheme3;
-         */
+    static void parsePages(NbtList pagesNbt, Map<String,String> bookSettings) throws Exception{
+        if(pagesNbt.size()<1){
+            return;
+        }
+        String pagesStr = "{";
         for(int i=0; i<pagesNbt.size(); ++i) {
-            String page = pagesNbt.getString(i);
-            page = StringUtils.normalizeSpace(page);
-            page = page.replace(" ","");
-            if(page.isEmpty()){
-                continue;
-            }
-            String[] settings = page.split("[;]");
-            for (String setting : settings) {
-                String[] kv = setting.split("[:]");
-                if (bookSettings.containsKey(kv[0])) {
-                    bookSettings.put(kv[0], kv[1]);
-                }else{
-                    throw new NullPointerException();
-                }
+            pagesStr = pagesStr + pagesNbt.getString(i);
+        }
+        pagesStr = pagesStr + "}";
+
+        JsonObject settingsJSON;
+        try {
+            settingsJSON  = JsonParser.parseString(pagesStr).getAsJsonObject();
+        }catch (Exception e){
+            throw new Exception("Might need to recheck your book: "+e.getLocalizedMessage(),e);
+        }
+
+        for (Map.Entry<String, JsonElement> setting : settingsJSON.entrySet()) {
+            String settingName = setting.getKey();
+            if(bookSettings.containsKey(settingName)){
+                bookSettings.put(settingName,setting.getValue().getAsString());
+            }else{
+                throw new Exception("unrecognized setting: " + settingName);
             }
         }
+
     }
     static String convertToString(Vec3i vec){
         try {
@@ -85,12 +84,13 @@ public interface BookSettingsUtility {
                                             BlockPos pos,
                                             PlayerEntity player,
                                             BlockEntity blockEntity,
-                                            Map<String,String> bookSettings){
+                                            Map<String,String> bookSettings) throws Exception{
         NbtList pagesNbt;
         try {
             pagesNbt = readPages(bookStack);
         }catch(Exception e){
-            return ErrorResponse.onErrorActionResult(world,pos,player,"can't find pages...");
+            ErrorResponse.onError(world,pos,player,"can't find pages...");
+            throw new Exception("can't find pages...",e);
         }
 
         if(pagesNbt.isEmpty()){
@@ -101,7 +101,8 @@ public interface BookSettingsUtility {
         try {
             parsePages(pagesNbt, bookSettings);
         }catch(Exception e){
-            return ErrorResponse.onErrorActionResult(world,pos,player,"unrecognized settings...");
+            ErrorResponse.onError(world,pos,player,e.getMessage());
+            throw new Exception(e.getMessage(),e);
         }
 
         return implementBookSettings(state,world,pos,player,blockEntity,bookSettings);

@@ -123,11 +123,16 @@ public class DecoBeaconBlock extends BlockWithEntity implements BlockEntityProvi
                 return ActionResult.SUCCESS;
 
             }else if(mainHandItemStack.hasNbt() && mainHandItemStack.getNbt().contains("pages")){
-                ActionResult result = executeBookProtocol(mainHandItemStack,state,world,pos,player,blockEntity,blockEntity.bookSettings);
-                if(result == ActionResult.FAIL){
-                    refreshBlockEntityBookSettings(state,blockEntity);
+                try {
+                    ActionResult result = executeBookProtocol(mainHandItemStack, state, world, pos, player, blockEntity, blockEntity.bookSettings);
+                    if(result == ActionResult.FAIL){
+                        refreshBlockEntityBookSettings(state,blockEntity);
+                    }
+                    return result;
+                }catch(Exception e){
+                    DecoBeacon.LOGGER.error(e.getMessage(),e);
+                    return ActionResult.FAIL;
                 }
-                return result;
             }
         }
         return ActionResult.PASS;
@@ -150,7 +155,7 @@ public class DecoBeaconBlock extends BlockWithEntity implements BlockEntityProvi
             }
         }catch(Exception e){
             DecoBeacon.LOGGER.error("Error: ", e);
-            return ErrorResponse.onErrorActionResult(world,pos,player,"color:"+color);
+            return ErrorResponse.onErrorActionResult(world,pos,player,"Unrecognized value: color:"+color);
         }
 
         try{
@@ -159,7 +164,7 @@ public class DecoBeaconBlock extends BlockWithEntity implements BlockEntityProvi
             }
         }catch(Exception e){
             DecoBeacon.LOGGER.error("Error: ", e);
-            return ErrorResponse.onErrorActionResult(world,pos,player,"activeLow:"+activeLow);
+            return ErrorResponse.onErrorActionResult(world,pos,player,"Unrecognized value: activeLow:"+activeLow);
         }
 
         try{
@@ -168,7 +173,7 @@ public class DecoBeaconBlock extends BlockWithEntity implements BlockEntityProvi
             }
         }catch(Exception e){
             DecoBeacon.LOGGER.error("Error: ", e);
-            return ErrorResponse.onErrorActionResult(world,pos,player,"isTransparent:"+isTransparent);
+            return ErrorResponse.onErrorActionResult(world,pos,player,"Unrecognized value: isTransparent:"+isTransparent);
         }
 
         return ActionResult.SUCCESS;
