@@ -8,7 +8,8 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Vec3i;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
-import net.minecraft.network.chat.TranslatableComponent;
+
+import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionResult;
 
@@ -92,7 +93,7 @@ public interface BookSettingsUtility {
 
         if(pagesNbt.isEmpty()){
             SpecialEffects.playSound(world, pos, SoundEvents.LIGHTNING_BOLT_THUNDER);
-            player.displayClientMessage(new TranslatableComponent("empty_book_error_prompt"),false);
+            player.displayClientMessage(Component.translatable("empty_book_error_prompt"),false);
             return InteractionResult.FAIL;
         }
         try {

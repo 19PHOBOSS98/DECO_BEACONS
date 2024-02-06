@@ -3,7 +3,6 @@ package net.phoboss.decobeacons.blocks;
 
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -122,11 +121,11 @@ public class ModBlocks {
             public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltip, TooltipFlag pFlag) {
                 if (Screen.hasShiftDown()) {
                     if(extraItemSettings.tooltipShiftKey!=null){
-                        pTooltip.add(new TranslatableComponent(extraItemSettings.tooltipShiftKey));
+                        pTooltip.add(Component.translatable(extraItemSettings.tooltipShiftKey));
                     }
                 } else {
                     if(extraItemSettings.tooltipKey!=null) {
-                        pTooltip.add(new TranslatableComponent(extraItemSettings.tooltipKey));
+                        pTooltip.add(Component.translatable(extraItemSettings.tooltipKey));
                     }
                 }
             }
