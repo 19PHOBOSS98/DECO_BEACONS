@@ -1,0 +1,20 @@
+{
+  "block.decobeacons.deco_beacon": "Deco Beacon",
+  "block.decobeacons.deco_beacon_ghost": "Ghost Deco Beacon",
+  "block.decobeacons.deco_beacon_fake": "Fake Beacon",
+  "block.decobeacons.deco_beacon_fake_ghost": "Ghost Fake Beacon",
+  "block.decobeacons.omni_beacon": "Omni Beacon",
+  "block.decobeacons.omni_beacon_ghost": "Ghost Omni Beacon",
+
+  "itemGroup.decobeacons_tab": "DECO BEACONS",
+
+  "block.decobeacons.notghost.tooltip": "Beam stops at solid blocks",
+
+  "block.decobeacons.ghost.tooltip": "Beam passes thru solid blocks (Press §eSHIFT§r)",
+  "block.decobeacons.ghost.tooltip.shift": "you can also pass thru it as well!",
+
+  "block.decobeacons.omni_beacon.tooltip": "redirect beam (Press §eSHIFT§r)",
+  "block.decobeacons.omni_beacon.tooltip.shift": "right click with torch",
+  "empty_book_error_prompt": "the pages are empty...",
+  "invalid_page_entry": "might need to check on what you wrote..."
+}

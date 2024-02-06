@@ -1,0 +1,52 @@
+{
+  "variants": {
+    "color=0": {
+      "model": "decobeacons:block/decobeaconghost/deco_beacon_0"
+    },
+    "color=1": {
+      "model": "decobeacons:block/decobeaconghost/deco_beacon_1"
+    },
+    "color=2": {
+      "model": "decobeacons:block/decobeaconghost/deco_beacon_2"
+    },
+    "color=3": {
+      "model": "decobeacons:block/decobeaconghost/deco_beacon_3"
+    },
+    "color=4": {
+      "model": "decobeacons:block/decobeaconghost/deco_beacon_4"
+    },
+    "color=5": {
+      "model": "decobeacons:block/decobeaconghost/deco_beacon_5"
+    },
+    "color=6": {
+      "model": "decobeacons:block/decobeaconghost/deco_beacon_6"
+    },
+    "color=7": {
+      "model": "decobeacons:block/decobeaconghost/deco_beacon_7"
+    },
+    "color=8": {
+      "model": "decobeacons:block/decobeaconghost/deco_beacon_8"
+    },
+    "color=9": {
+      "model": "decobeacons:block/decobeaconghost/deco_beacon_9"
+    },
+    "color=10": {
+      "model": "decobeacons:block/decobeaconghost/deco_beacon_10"
+    },
+    "color=11": {
+      "model": "decobeacons:block/decobeaconghost/deco_beacon_11"
+    },
+    "color=12": {
+      "model": "decobeacons:block/decobeaconghost/deco_beacon_12"
+    },
+    "color=13": {
+      "model": "decobeacons:block/decobeaconghost/deco_beacon_13"
+    },
+    "color=14": {
+      "model": "decobeacons:block/decobeaconghost/deco_beacon_14"
+    },
+    "color=15": {
+      "model": "decobeacons:block/decobeaconghost/deco_beacon_15"
+    }
+  }
+}
