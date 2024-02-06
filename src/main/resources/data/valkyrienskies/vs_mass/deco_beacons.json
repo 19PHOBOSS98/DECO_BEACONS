@@ -1,0 +1,18 @@
+[
+  {
+    "block": "decobeacon:deco_beacon",
+    "mass": 100.0
+  },
+  {
+    "block": "decobeacon:deco_beacon_fake",
+    "mass": 100.0
+  },
+  {
+    "block": "decobeacon:deco_beacon_ghost",
+    "mass": 100.0
+  },
+  {
+    "block": "decobeacon:deco_beacon_fake_ghost",
+    "mass": 100.0
+  }
+]

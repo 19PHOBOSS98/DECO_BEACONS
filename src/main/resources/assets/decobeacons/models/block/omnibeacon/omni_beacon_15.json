@@ -1,0 +1,31 @@
+{   "parent": "block/block",
+  "textures": {
+    "particle": "block/glass",
+    "glass": "block/black_stained_glass",
+    "beacon": "block/sea_lantern"
+  },
+  "elements": [
+    {   "from": [ 3, 3, 3 ],
+      "to": [ 13, 13, 13 ],
+      "faces": {
+        "down":  { "uv": [ 0, 0, 16, 16 ], "texture": "#beacon" },
+        "up":    { "uv": [ 0, 0, 16, 16 ], "texture": "#beacon" },
+        "north": { "uv": [ 0, 0, 16, 16 ], "texture": "#beacon" },
+        "south": { "uv": [ 0, 0, 16, 16 ], "texture": "#beacon" },
+        "west":  { "uv": [ 0, 0, 16, 16 ], "texture": "#beacon" },
+        "east":  { "uv": [ 0, 0, 16, 16 ], "texture": "#beacon" }
+      }
+    },
+    {   "from": [ 0, 0, 0 ],
+      "to": [ 16, 16, 16 ],
+      "faces": {
+        "down":  { "uv": [ 0, 0, 16, 16 ], "texture": "#glass", "tintindex": 0, "cullface": "down" },
+        "up":    { "uv": [ 0, 0, 16, 16 ], "texture": "#glass", "tintindex": 0, "cullface": "up" },
+        "north": { "uv": [ 0, 0, 16, 16 ], "texture": "#glass", "tintindex": 0, "cullface": "north" },
+        "south": { "uv": [ 0, 0, 16, 16 ], "texture": "#glass", "tintindex": 0, "cullface": "south" },
+        "west":  { "uv": [ 0, 0, 16, 16 ], "texture": "#glass", "tintindex": 0, "cullface": "west" },
+        "east":  { "uv": [ 0, 0, 16, 16 ], "texture": "#glass", "tintindex": 0,"cullface": "east" }
+      }
+    }
+  ]
+}

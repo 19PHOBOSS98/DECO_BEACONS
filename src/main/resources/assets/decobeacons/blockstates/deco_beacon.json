@@ -1,0 +1,100 @@
+{
+  "variants": {
+    "color=0,lit=true": {
+      "model": "decobeacons:block/decobeacon/deco_beacon_0_lit"
+    },
+    "color=1,lit=true": {
+      "model": "decobeacons:block/decobeacon/deco_beacon_1_lit"
+    },
+    "color=2,lit=true": {
+      "model": "decobeacons:block/decobeacon/deco_beacon_2_lit"
+    },
+    "color=3,lit=true": {
+      "model": "decobeacons:block/decobeacon/deco_beacon_3_lit"
+    },
+    "color=4,lit=true": {
+      "model": "decobeacons:block/decobeacon/deco_beacon_4_lit"
+    },
+    "color=5,lit=true": {
+      "model": "decobeacons:block/decobeacon/deco_beacon_5_lit"
+    },
+    "color=6,lit=true": {
+      "model": "decobeacons:block/decobeacon/deco_beacon_6_lit"
+    },
+    "color=7,lit=true": {
+      "model": "decobeacons:block/decobeacon/deco_beacon_7_lit"
+    },
+    "color=8,lit=true": {
+      "model": "decobeacons:block/decobeacon/deco_beacon_8_lit"
+    },
+    "color=9,lit=true": {
+      "model": "decobeacons:block/decobeacon/deco_beacon_9_lit"
+    },
+    "color=10,lit=true": {
+      "model": "decobeacons:block/decobeacon/deco_beacon_10_lit"
+    },
+    "color=11,lit=true": {
+      "model": "decobeacons:block/decobeacon/deco_beacon_11_lit"
+    },
+    "color=12,lit=true": {
+      "model": "decobeacons:block/decobeacon/deco_beacon_12_lit"
+    },
+    "color=13,lit=true": {
+      "model": "decobeacons:block/decobeacon/deco_beacon_13_lit"
+    },
+    "color=14,lit=true": {
+      "model": "decobeacons:block/decobeacon/deco_beacon_14_lit"
+    },
+    "color=15,lit=true": {
+      "model": "decobeacons:block/decobeacon/deco_beacon_15_lit"
+    },
+    "color=0,lit=false": {
+      "model": "decobeacons:block/decobeacon/deco_beacon_0"
+    },
+    "color=1,lit=false": {
+      "model": "decobeacons:block/decobeacon/deco_beacon_1"
+    },
+    "color=2,lit=false": {
+      "model": "decobeacons:block/decobeacon/deco_beacon_2"
+    },
+    "color=3,lit=false": {
+      "model": "decobeacons:block/decobeacon/deco_beacon_3"
+    },
+    "color=4,lit=false": {
+      "model": "decobeacons:block/decobeacon/deco_beacon_4"
+    },
+    "color=5,lit=false": {
+      "model": "decobeacons:block/decobeacon/deco_beacon_5"
+    },
+    "color=6,lit=false": {
+      "model": "decobeacons:block/decobeacon/deco_beacon_6"
+    },
+    "color=7,lit=false": {
+      "model": "decobeacons:block/decobeacon/deco_beacon_7"
+    },
+    "color=8,lit=false": {
+      "model": "decobeacons:block/decobeacon/deco_beacon_8"
+    },
+    "color=9,lit=false": {
+      "model": "decobeacons:block/decobeacon/deco_beacon_9"
+    },
+    "color=10,lit=false": {
+      "model": "decobeacons:block/decobeacon/deco_beacon_10"
+    },
+    "color=11,lit=false": {
+      "model": "decobeacons:block/decobeacon/deco_beacon_11"
+    },
+    "color=12,lit=false": {
+      "model": "decobeacons:block/decobeacon/deco_beacon_12"
+    },
+    "color=13,lit=false": {
+      "model": "decobeacons:block/decobeacon/deco_beacon_13"
+    },
+    "color=14,lit=false": {
+      "model": "decobeacons:block/decobeacon/deco_beacon_14"
+    },
+    "color=15,lit=false": {
+      "model": "decobeacons:block/decobeacon/deco_beacon_15"
+    }
+  }
+}

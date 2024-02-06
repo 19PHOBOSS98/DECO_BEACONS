@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "decobeacons:block/decobeaconfake/deco_beacon_fake"
+    }
+  }
+}

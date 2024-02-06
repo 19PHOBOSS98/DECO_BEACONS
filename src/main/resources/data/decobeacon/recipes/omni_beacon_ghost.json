@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "deco_beacon",
+  "ingredients": [
+    {
+      "item": "minecraft:amethyst_shard"
+    },
+    {
+      "item": "decobeacon:omni_beacon"
+    }
+  ],
+  "result": {
+    "item": "decobeacon:omni_beacon_ghost"
+  }
+}
