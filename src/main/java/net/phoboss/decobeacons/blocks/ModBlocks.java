@@ -31,13 +31,18 @@ import java.util.List;
 import java.util.function.Supplier;
 
 public class ModBlocks {
-
+    public static AbstractBlock.Settings solidBlockBehaviour = AbstractBlock
+            .Settings.of(Material.GLASS, MapColor.DIAMOND_BLUE)
+            .luminance((state) -> state.get(Properties.LIT) ? 15 : 0)
+            .nonOpaque();
+    public static AbstractBlock.Settings ghostBlockBehaviour = AbstractBlock
+            .Settings.of(Material.GLASS, MapColor.DIAMOND_BLUE)
+            .luminance((state) -> state.get(Properties.LIT) ? 15 : 0)
+            .nonOpaque()
+            .noCollision();
     public static final Block DECO_BEACON = ModBlocks.registerBlock(
             "deco_beacon",
-            new DecoBeaconBlock(AbstractBlock
-                    .Settings.of(Material.GLASS, MapColor.DIAMOND_BLUE)
-                    .luminance((state) -> state.get(Properties.LIT) ? 15 : 0)
-                    .nonOpaque()),
+            new DecoBeaconBlock(solidBlockBehaviour),
             ModItemGroups.DECO_BEACON,
             new ExtraItemSettings()
                     //.setStackLimit(1)
@@ -46,10 +51,7 @@ public class ModBlocks {
 
     public static final Block DECO_BEACON_FAKE = ModBlocks.registerBlock(
             "deco_beacon_fake",
-            new DecoBeaconBlock(AbstractBlock
-                    .Settings.of(Material.GLASS, MapColor.DIAMOND_BLUE)
-                    .luminance((state) -> state.get(Properties.LIT) ? 15 : 0)
-                    .nonOpaque()),
+            new DecoBeaconBlock(solidBlockBehaviour),
             ModItemGroups.DECO_BEACON,
             new ExtraItemSettings()
                     //.setStackLimit(1)
@@ -58,11 +60,7 @@ public class ModBlocks {
 
     public static final Block DECO_BEACON_GHOST = ModBlocks.registerBlock(
             "deco_beacon_ghost",
-            new DecoBeaconGhostBlock(AbstractBlock
-                    .Settings.of(Material.GLASS, MapColor.DIAMOND_BLUE)
-                    .luminance((state) -> state.get(Properties.LIT) ? 15 : 0)
-                    .nonOpaque()
-                    .noCollision()),
+            new DecoBeaconGhostBlock(ghostBlockBehaviour),
             ModItemGroups.DECO_BEACON,
             new ExtraItemSettings()
                     //.setStackLimit(1)
@@ -72,11 +70,7 @@ public class ModBlocks {
 
     public static final Block DECO_BEACON_GHOST_FAKE = ModBlocks.registerBlock(
             "deco_beacon_fake_ghost",
-            new DecoBeaconGhostBlock(AbstractBlock
-                    .Settings.of(Material.GLASS, MapColor.DIAMOND_BLUE)
-                    .luminance((state) -> state.get(Properties.LIT) ? 15 : 0)
-                    .nonOpaque()
-                    .noCollision()),
+            new DecoBeaconGhostBlock(ghostBlockBehaviour),
             ModItemGroups.DECO_BEACON,
             new ExtraItemSettings()
                     //.setStackLimit(1)
@@ -86,10 +80,7 @@ public class ModBlocks {
 
     public static final Block OMNI_BEACON = ModBlocks.registerBlock(
             "omni_beacon",
-            new OmniBeaconBlock(AbstractBlock
-                    .Settings.of(Material.GLASS, MapColor.DIAMOND_BLUE)
-                    .luminance((state) -> state.get(Properties.LIT) ? 15 : 0)
-                    .nonOpaque()),
+            new OmniBeaconBlock(solidBlockBehaviour),
             ModItemGroups.DECO_BEACON,
             new ExtraItemSettings()
                     //.setStackLimit(1)
@@ -99,11 +90,7 @@ public class ModBlocks {
 
     public static final Block OMNI_BEACON_GHOST = ModBlocks.registerBlock(
             "omni_beacon_ghost",
-            new OmniBeaconGhostBlock(AbstractBlock
-                    .Settings.of(Material.GLASS, MapColor.DIAMOND_BLUE)
-                    .luminance((state) -> state.get(Properties.LIT) ? 15 : 0)
-                    .nonOpaque()
-                    .noCollision()),
+            new OmniBeaconGhostBlock(ghostBlockBehaviour),
             ModItemGroups.DECO_BEACON,
             new ExtraItemSettings()
                     //.setStackLimit(1)
