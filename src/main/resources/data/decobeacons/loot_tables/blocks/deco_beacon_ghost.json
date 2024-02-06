@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "decobeacon:deco_beacon"
+          "name": "decobeacons:deco_beacon_ghost"
         }
       ]
     }

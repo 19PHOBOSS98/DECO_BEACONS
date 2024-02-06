@@ -4,7 +4,7 @@
   "pattern": [
     "GGG",
     "GSG",
-    "OOO"
+    "GGG"
   ],
   "key": {
     "S": {
@@ -12,12 +12,9 @@
     },
     "G": {
       "item": "minecraft:glass"
-    },
-    "O": {
-      "item": "minecraft:obsidian"
     }
   },
   "result": {
-    "item": "decobeacon:deco_beacon_fake"
+    "item": "decobeacons:omni_beacon"
   }
 }

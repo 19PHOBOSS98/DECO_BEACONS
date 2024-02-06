@@ -6,10 +6,10 @@
       "item": "minecraft:amethyst_shard"
     },
     {
-      "item": "decobeacon:deco_beacon"
+      "item": "decobeacons:deco_beacon"
     }
   ],
   "result": {
-    "item": "decobeacon:deco_beacon_ghost"
+    "item": "decobeacons:deco_beacon_ghost"
   }
 }
