@@ -6,10 +6,10 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.material.Material;
-import net.minecraft.world.level.material.MaterialColor;
+
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -32,67 +32,63 @@ public class ModBlocks {
 
 
     public static BlockBehaviour.Properties solidBlockBehaviour = BlockBehaviour
-            .Properties.of(Material.GLASS, MaterialColor.DIAMOND)
+            //.Properties.of(Material.GLASS, MaterialColor.DIAMOND)
+            .Properties.copy(Blocks.GLASS)
             .lightLevel((state) -> state.getValue(BlockStateProperties.LIT) ? 15 : 0)
             .noOcclusion();
     public static BlockBehaviour.Properties ghostBlockBehaviour = BlockBehaviour
-            .Properties.of(Material.GLASS, MaterialColor.DIAMOND)
+            //.Properties.of(Material.GLASS, MaterialColor.DIAMOND)
+            .Properties.copy(Blocks.GLASS)
             .lightLevel((state) -> state.getValue(BlockStateProperties.LIT) ? 15 : 0)
             .noOcclusion()
             .noCollission();
 
-    public static final RegistryObject<Block> DECO_BEACON = ModBlocks.registerBlock(
+    public static final RegistryObject<Block> DECO_BEACON = registerBlock(
             "deco_beacon",
             () -> new DecoBeaconBlock(solidBlockBehaviour),
-            ModItemGroups.DECO_BEACON,
             new ExtraItemSettings()
                     //.setStackLimit(1)
                     .setTooltipKey("block.decobeacons.notghost.tooltip")
     );
 
-    public static final RegistryObject<Block> DECO_BEACON_FAKE = ModBlocks.registerBlock(
+    public static final RegistryObject<Block> DECO_BEACON_FAKE = registerBlock(
             "deco_beacon_fake",
             () -> new DecoBeaconBlock(solidBlockBehaviour),
-            ModItemGroups.DECO_BEACON,
             new ExtraItemSettings()
                     //.setStackLimit(1)
                     .setTooltipKey("block.decobeacons.notghost.tooltip")
     );
 
-    public static final RegistryObject<Block> DECO_BEACON_GHOST = ModBlocks.registerBlock(
+    public static final RegistryObject<Block> DECO_BEACON_GHOST = registerBlock(
             "deco_beacon_ghost",
             () -> new DecoBeaconGhostBlock(ghostBlockBehaviour),
-            ModItemGroups.DECO_BEACON,
             new ExtraItemSettings()
                     //.setStackLimit(1)
                     .setTooltipKey("block.decobeacons.ghost.tooltip")
                     .setTooltipShiftKey("block.decobeacons.ghost.tooltip.shift")
     );
 
-    public static final RegistryObject<Block> DECO_BEACON_GHOST_FAKE = ModBlocks.registerBlock(
+    public static final RegistryObject<Block> DECO_BEACON_GHOST_FAKE = registerBlock(
             "deco_beacon_fake_ghost",
             () -> new DecoBeaconGhostBlock(ghostBlockBehaviour),
-            ModItemGroups.DECO_BEACON,
             new ExtraItemSettings()
                     //.setStackLimit(1)
                     .setTooltipKey("block.decobeacons.ghost.tooltip")
                     .setTooltipShiftKey("block.decobeacons.ghost.tooltip.shift")
     );
 
-    public static final RegistryObject<Block> OMNI_BEACON = ModBlocks.registerBlock(
+    public static final RegistryObject<Block> OMNI_BEACON = registerBlock(
             "omni_beacon",
             () -> new OmniBeaconBlock(solidBlockBehaviour),
-            ModItemGroups.DECO_BEACON,
             new ExtraItemSettings()
                     //.setStackLimit(1)
                     .setTooltipKey("block.decobeacons.omni_beacon.tooltip")
                     .setTooltipShiftKey("block.decobeacons.omni_beacon.tooltip.shift")
     );
 
-    public static final RegistryObject<Block> OMNI_BEACON_GHOST = ModBlocks.registerBlock(
+    public static final RegistryObject<Block> OMNI_BEACON_GHOST = registerBlock(
             "omni_beacon_ghost",
             () -> new OmniBeaconGhostBlock(ghostBlockBehaviour),
-            ModItemGroups.DECO_BEACON,
             new ExtraItemSettings()
                     //.setStackLimit(1)
                     .setTooltipKey("block.decobeacons.omni_beacon.tooltip")
@@ -101,22 +97,22 @@ public class ModBlocks {
 
 
 
-    public static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block, CreativeModeTab group){
+    public static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block){
         RegistryObject<T> toReturn = BLOCKS.register(name,block);
-        registerBlockItem(name, toReturn, group);
+        registerBlockItem(name, toReturn);
         return toReturn;
     }
-    public static <T extends Block> RegistryObject<Item> registerBlockItem(String name, RegistryObject<T> block, CreativeModeTab group){
-        return ModItems.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties().tab(group)));
+    public static <T extends Block> RegistryObject<Item> registerBlockItem(String name, RegistryObject<T> block){
+        return ModItems.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
     }
 
-    public static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block, CreativeModeTab group, ExtraItemSettings extraItemSettings){
+    public static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block, ExtraItemSettings extraItemSettings){
         RegistryObject<T> toReturn = BLOCKS.register(name,block);
-        registerBlockItem(name, toReturn, group,extraItemSettings);
+        registerBlockItem(name, toReturn,extraItemSettings);
         return toReturn;
     }
-    public static <T extends Block> RegistryObject<Item> registerBlockItem(String name, RegistryObject<T> block, CreativeModeTab group, ExtraItemSettings extraItemSettings){
-        return ModItems.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties().tab(group).stacksTo(extraItemSettings.stackLimit)){
+    public static <T extends Block> RegistryObject<Item> registerBlockItem(String name, RegistryObject<T> block, ExtraItemSettings extraItemSettings){
+        return ModItems.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties().stacksTo(extraItemSettings.stackLimit)){
             @Override
             public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltip, TooltipFlag pFlag) {
                 if (Screen.hasShiftDown()) {

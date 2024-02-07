@@ -3,10 +3,7 @@ package net.phoboss.decobeacons.blocks.omnibeacon;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Matrix3f;
-import com.mojang.math.Matrix4f;
-import com.mojang.math.Quaternion;
-import com.mojang.math.Vector3f;
+import com.mojang.math.Axis;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -17,6 +14,10 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.phys.Vec3;
 import net.phoboss.decobeacons.blocks.decobeacon.DecoBeaconBlockEntity;
+import org.joml.Matrix3f;
+import org.joml.Matrix4f;
+import org.joml.Quaternionf;
+import org.joml.Vector3f;
 
 import java.util.List;
 
@@ -76,7 +77,8 @@ public class OmniBeaconBlockEntityRenderer implements BlockEntityRenderer<OmniBe
         matrices.pushPose();
         matrices.translate(0.5, 0.5, 0.5);
         //matrices.multiply(Vector3f.POSITIVE_X.getDegreesQuaternion(180.0F));
-        matrices.mulPose(getQuatFrom2Vectors(new Vector3f(0,1,0), beamDirection));
+        //matrices.mulPose(getQuatFrom2Vectors(new Vector3f(0,1,0), beamDirection));
+        matrices.mulPose(new Quaternionf().rotateTo(new Vector3f(0,1,0), beamDirection));
         float f = (float)Math.floorMod(worldTime, 40) + tickDelta;
         float g = maxY < 0 ? f : -f;
         float h = Mth.frac(g * 0.2F - (float)Mth.floor(g * 0.1F));
@@ -85,7 +87,7 @@ public class OmniBeaconBlockEntityRenderer implements BlockEntityRenderer<OmniBe
         float l = color[2];
         matrices.pushPose();
 
-        matrices.mulPose(Vector3f.YP.rotationDegrees(f * 2.25F - 45.0F));
+        matrices.mulPose(Axis.YP.rotationDegrees(f * 2.25F - 45.0F));
 
         float m = 0.0F;
         float p = 0.0F;
@@ -250,26 +252,4 @@ public class OmniBeaconBlockEntityRenderer implements BlockEntityRenderer<OmniBe
         return 256;
     }
 
-    public static Quaternion getQuatFrom2Vectors(Vector3f fromVec, Vector3f toVec){
-        Quaternion q;
-        Vector3f cp = fromVec;
-        double dp = fromVec.dot(toVec);
-
-        if (dp<-0.9999999) {//opposite direction
-            if(cp.equals(new Vector3f(0,1,0))){
-                return new Quaternion(new Vector3f(1,0,0), 180, true);
-            }
-            cp.cross(new Vector3f(0,1,0));
-            q = new Quaternion(cp, 180, true);
-            q.normalize();
-            return q;
-        }else if(dp>0.9999999) {//parallel ...enough
-            return new Quaternion(0,0,0,1);
-        }
-        cp.cross(toVec);
-        float qw = (float) (Math.sqrt(fromVec.dot(fromVec) * toVec.dot(toVec)) + dp);
-        q = new Quaternion(cp.x(),cp.y(),cp.z(),qw);
-        q.normalize();
-        return q;
-    }
 }

@@ -2,9 +2,8 @@ package net.phoboss.decobeacons.blocks.decobeacon;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Matrix3f;
-import com.mojang.math.Matrix4f;
-import com.mojang.math.Vector3f;
+
+import com.mojang.math.Axis;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -14,6 +13,8 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.phys.Vec3;
+import org.joml.Matrix3f;
+import org.joml.Matrix4f;
 
 import java.util.List;
 
@@ -68,7 +69,7 @@ public class DecoBeaconBlockEntityRenderer implements BlockEntityRenderer<DecoBe
         float k = color[1];
         float l = color[2];
         matrices.pushPose();
-        matrices.mulPose(Vector3f.YP.rotationDegrees(f * 2.25F - 45.0F));
+        matrices.mulPose(Axis.YP.rotationDegrees(f * 2.25F - 45.0F));
         float m = 0.0F;
         float p = 0.0F;
         float q = -innerRadius;

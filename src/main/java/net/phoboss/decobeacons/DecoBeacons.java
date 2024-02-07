@@ -1,12 +1,14 @@
 package net.phoboss.decobeacons;
 
 import com.mojang.logging.LogUtils;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.common.MinecraftForge;
 
+import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.InterModComms;
@@ -18,6 +20,7 @@ import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.phoboss.decobeacons.blocks.ModBlockEntities;
 import net.phoboss.decobeacons.blocks.ModBlocks;
+import net.phoboss.decobeacons.items.ModItemGroups;
 import net.phoboss.decobeacons.items.ModItems;
 import net.phoboss.decobeacons.rendering.ModRendering;
 import org.slf4j.Logger;
@@ -35,6 +38,9 @@ public class DecoBeacons
     public DecoBeacons()
     {
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
+
+        ModItemGroups.registerAll(eventBus);
+
         ModBlocks.registerAll(eventBus);
         ModItems.registerAll(eventBus);
 
@@ -43,6 +49,7 @@ public class DecoBeacons
         eventBus.addListener(this::setup);
         eventBus.addListener(this::setupClient);
         MinecraftForge.EVENT_BUS.register(this);
+        eventBus.addListener(this::addCreative);
     }
     private void setupClient(final FMLCommonSetupEvent event)
     {
@@ -50,6 +57,10 @@ public class DecoBeacons
     }
     private void setup(final FMLCommonSetupEvent event)
     {
+
+    }
+
+    private void addCreative(BuildCreativeModeTabContentsEvent event){
 
     }
 

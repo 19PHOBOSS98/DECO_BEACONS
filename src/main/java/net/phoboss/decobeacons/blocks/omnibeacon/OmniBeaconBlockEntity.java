@@ -1,7 +1,6 @@
 package net.phoboss.decobeacons.blocks.omnibeacon;
 
 import com.google.common.collect.Lists;
-import com.mojang.math.Vector3f;
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -20,6 +19,7 @@ import net.phoboss.decobeacons.DecoBeacons;
 import net.phoboss.decobeacons.blocks.ModBlockEntities;
 import net.phoboss.decobeacons.blocks.decobeacon.DecoBeaconBlock;
 import net.phoboss.decobeacons.blocks.decobeacon.DecoBeaconBlockEntity;
+import org.joml.Vector3f;
 
 
 import java.util.Arrays;
@@ -54,18 +54,21 @@ public class OmniBeaconBlockEntity extends DecoBeaconBlockEntity implements IFor
         return this.beamDirection;
     }
     public String getBeamDirectionName() {
-        return Direction.fromNormal(
+        return Direction.fromDelta(
                 (int)this.beamDirection.x(),
                 (int)this.beamDirection.y(),
                 (int)this.beamDirection.z()).getName();
     }
     public Vec3i getBeamDirectionInt() { //:`(
-        return new Vec3i(this.beamDirection.x(),this.beamDirection.y(),this.beamDirection.z());
+        return new Vec3i(
+                (int)this.beamDirection.x(),
+                (int)this.beamDirection.y(),
+                (int)this.beamDirection.z());
     }
     public void setBeamDirection(Vector3f beamDirection) {
         this.beamDirection = beamDirection;
         this.bookSettings.put("direction",
-                Direction.fromNormal(
+                Direction.fromDelta(
                         (int) beamDirection.x(),
                         (int) beamDirection.y(),
                         (int) beamDirection.z()).getName());
@@ -81,7 +84,10 @@ public class OmniBeaconBlockEntity extends DecoBeaconBlockEntity implements IFor
         this.prevBlockPos = prevBlockPos;
     }
     public Vec3i getPrevBeamDirectionInt() {
-        return new Vec3i(this.prevBeamDirection.x(),this.prevBeamDirection.y(),this.prevBeamDirection.z());
+        return new Vec3i(
+                (int)this.prevBeamDirection.x(),
+                (int)this.prevBeamDirection.y(),
+                (int)this.prevBeamDirection.z());
     }
     public void setPrevBeamDirection(Vec3i prevBeamDirection) {
         this.prevBeamDirection = new Vector3f(prevBeamDirection.getX(),prevBeamDirection.getY(),prevBeamDirection.getZ());
@@ -124,7 +130,7 @@ public class OmniBeaconBlockEntity extends DecoBeaconBlockEntity implements IFor
 
             this.bookSettings.put("maxBeamLength", Integer.toString(this.maxBeamLength));
             this.bookSettings.put("direction",
-                    Direction.fromNormal(
+                    Direction.fromDelta(
                             (int) this.beamDirection.x(),
                             (int) this.beamDirection.y(),
                             (int) this.beamDirection.z()).getName());

@@ -1,6 +1,5 @@
 package net.phoboss.decobeacons.blocks.omnibeacon;
 
-import com.mojang.math.Vector3f;
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
@@ -21,9 +20,9 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.phoboss.decobeacons.DecoBeacons;
 import net.phoboss.decobeacons.blocks.ModBlockEntities;
 import net.phoboss.decobeacons.blocks.decobeacon.DecoBeaconBlock;
-import net.phoboss.decobeacons.blocks.decobeacon.DecoBeaconBlockEntity;
 import net.phoboss.decobeacons.utility.ErrorResponse;
 import org.jetbrains.annotations.Nullable;
+import org.joml.Vector3f;
 
 import java.util.Map;
 
