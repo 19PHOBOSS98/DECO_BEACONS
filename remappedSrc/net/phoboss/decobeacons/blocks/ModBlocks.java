@@ -14,6 +14,7 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.property.Properties;
 import net.minecraft.text.Text;
+import net.minecraft.text.TranslatableTextContent;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
@@ -25,7 +26,9 @@ import net.phoboss.decobeacons.blocks.omnibeaconghost.OmniBeaconGhostBlock;
 import net.phoboss.decobeacons.items.ModItemGroups;
 import org.jetbrains.annotations.Nullable;
 
+import javax.imageio.spi.RegisterableService;
 import java.util.List;
+import java.util.function.Supplier;
 
 public class ModBlocks {
     public static AbstractBlock.Settings solidBlockBehaviour = AbstractBlock
@@ -115,11 +118,11 @@ public class ModBlocks {
             public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
                 if (Screen.hasShiftDown()) {
                     if(extraItemSettings.tooltipShiftKey!=null){
-                        tooltip.add(Text.translatable(extraItemSettings.tooltipShiftKey));
+                        tooltip.add(new TranslatableTextContent(extraItemSettings.tooltipShiftKey));
                     }
                 } else {
                     if(extraItemSettings.tooltipKey!=null) {
-                        tooltip.add(Text.translatable(extraItemSettings.tooltipKey));
+                        tooltip.add(new TranslatableTextContent(extraItemSettings.tooltipKey));
                     }
                 }
             }
