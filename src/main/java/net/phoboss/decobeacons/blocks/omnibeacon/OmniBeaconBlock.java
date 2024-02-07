@@ -15,13 +15,13 @@ import net.minecraft.util.Util;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.Vec3f;
 import net.minecraft.world.World;
 import net.phoboss.decobeacons.DecoBeacons;
 import net.phoboss.decobeacons.blocks.ModBlockEntities;
 import net.phoboss.decobeacons.blocks.decobeacon.DecoBeaconBlock;
 import net.phoboss.decobeacons.utility.ErrorResponse;
 import org.jetbrains.annotations.Nullable;
+import org.joml.Vector3f;
 
 import java.util.Map;
 
@@ -64,7 +64,7 @@ public class OmniBeaconBlock extends DecoBeaconBlock {
             if(mainHandItem == Items.TORCH){
                 Direction side = hit.getSide();
                 blockEntity.bookSettings.put("direction",side.getName());
-                blockEntity.setBeamDirection(side.getUnitVector());
+                blockEntity.setBeamDirection((Vector3f) side.getUnitVector());
                 return ActionResult.SUCCESS;
             }
         }
@@ -113,7 +113,7 @@ public class OmniBeaconBlock extends DecoBeaconBlock {
             try {
                 if (!direction.isEmpty()) {
                     direction = direction.toLowerCase();
-                    Vec3f beamDirection = BEAM_DIRECTION_DICTIONARY.get(direction).getUnitVector();
+                    Vector3f beamDirection = BEAM_DIRECTION_DICTIONARY.get(direction).getUnitVector();
                     omniBeaconBlockEntity.setBeamDirection(beamDirection);
                 }
             } catch (Exception e) {

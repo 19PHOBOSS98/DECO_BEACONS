@@ -6,6 +6,8 @@ import net.minecraft.client.render.block.entity.BlockEntityRendererFactory;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.*;
+import org.joml.Matrix3f;
+import org.joml.Matrix4f;
 
 import java.util.List;
 
@@ -60,7 +62,7 @@ public class DecoBeaconBlockEntityRenderer implements BlockEntityRenderer<DecoBe
         float k = color[1];
         float l = color[2];
         matrices.push();
-        matrices.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(f * 2.25F - 45.0F));
+        matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(f * 2.25F - 45.0F));
         float m = 0.0F;
         float p = 0.0F;
         float q = -innerRadius;

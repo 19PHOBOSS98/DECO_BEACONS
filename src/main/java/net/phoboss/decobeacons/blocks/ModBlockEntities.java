@@ -2,8 +2,10 @@ package net.phoboss.decobeacons.blocks;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
+
 import net.phoboss.decobeacons.DecoBeacons;
 import net.phoboss.decobeacons.blocks.decobeacon.DecoBeaconBlockEntity;
 import net.phoboss.decobeacons.blocks.omnibeacon.OmniBeaconBlockEntity;
@@ -20,7 +22,7 @@ public class ModBlockEntities {
 
     public static void registerAll() {
         DECO_BEACON = Registry.register(
-                Registry.BLOCK_ENTITY_TYPE,
+                Registries.BLOCK_ENTITY_TYPE,
                 new Identifier(DecoBeacons.MOD_ID,"deco_beacon"),
                 FabricBlockEntityTypeBuilder.create(
                         DecoBeaconBlockEntity::new,
@@ -31,7 +33,7 @@ public class ModBlockEntities {
                         ).build(null));
 
         OMNI_BEACON = Registry.register(
-                Registry.BLOCK_ENTITY_TYPE,
+                Registries.BLOCK_ENTITY_TYPE,
                 new Identifier(DecoBeacons.MOD_ID,"omni_beacon"),
                 FabricBlockEntityTypeBuilder.create(
                         OmniBeaconBlockEntity::new,

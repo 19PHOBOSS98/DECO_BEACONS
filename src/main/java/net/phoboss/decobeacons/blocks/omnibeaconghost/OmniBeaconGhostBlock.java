@@ -18,13 +18,5 @@ public class OmniBeaconGhostBlock extends OmniBeaconBlock {
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
         return new OmniBeaconBlockEntity(pos,state,true);
     }
-    /*
-    @Nullable
-    @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        return checkType(type, ModBlockEntities.OMNI_BEACON.get(), OmniBeaconBlockEntity::tick);
-    }
-    */
-
 
 }

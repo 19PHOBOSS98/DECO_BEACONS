@@ -44,15 +44,18 @@ dependencies {
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
 
-	modRuntimeOnly "maven.modrinth:mOgUt4GM:gSoPJyVn" //https://modrinth.com/mod/modmenu/version/3.2.5
+	modRuntimeOnly "maven.modrinth:mOgUt4GM:lEkperf6" //https://modrinth.com/mod/modmenu/version/7.2.2
 
+	/*//translucent multi-textured blocks (ie slime, honey, deco-beacons) render weird
 	implementation 'org.joml:joml:1.10.5'
 	implementation "io.github.douira:glsl-transformer:2.0.0"
 	implementation "org.anarres:jcpp:1.4.14"
-	modRuntimeOnly "maven.modrinth:iris:1.6.11+1.19.2"
+	modRuntimeOnly "maven.modrinth:iris:1.6.11+1.20.1"
 
-	modCompileOnlyApi "maven.modrinth:YL57xq9U:LgOJIpIS" //https://modrinth.com/mod/iris/version/1.6.11+1.18.2
-	modCompileOnlyApi "maven.modrinth:AANobbMI:rAfhHfow" //https://modrinth.com/mod/sodium/version/mc1.18.2-0.4.1
+	modCompileOnlyApi "maven.modrinth:YL57xq9U:ogjxrwGQ" //https://modrinth.com/mod/iris/version/1.6.11+1.20.1
+	modCompileOnlyApi "maven.modrinth:AANobbMI:4OZL6q9h" //https://modrinth.com/mod/sodium/version/mc1.20.1-0.5.3 // it said iris1.6.11 needed 0.5.3 specifically
+	modRuntimeOnly "maven.modrinth:AANobbMI:4OZL6q9h"
+	*/
 
 }
 

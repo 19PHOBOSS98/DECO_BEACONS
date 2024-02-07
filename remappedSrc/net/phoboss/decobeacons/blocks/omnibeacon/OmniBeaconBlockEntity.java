@@ -12,7 +12,7 @@ import net.minecraft.state.property.Properties;
 import net.minecraft.util.DyeColor;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.Vec3f;
+import net.minecraft.util.math.Vector3f;
 import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.World;
 import net.phoboss.decobeacons.DecoBeacons;
@@ -35,11 +35,11 @@ public class OmniBeaconBlockEntity extends DecoBeaconBlockEntity {
 
 
     private int maxBeamLength = 512;
-    private Vec3f beamDirection = new Vec3f(0,1,0);
+    private Vector3f beamDirection = new Vector3f(0,1,0);
     public List<DecoBeamSegment> omniSegmentsBuffer = Lists.newArrayList();
     public List<DecoBeamSegment> omniBeamSegments = Lists.newArrayList();
     public BlockPos prevBlockPos = getPos();
-    public Vec3f prevBeamDirection = getBeamDirection();
+    public Vector3f prevBeamDirection = getBeamDirection();
 
     @Override
     public Object2ObjectLinkedOpenHashMap<String, String> setupBookSettings() {
@@ -49,7 +49,7 @@ public class OmniBeaconBlockEntity extends DecoBeaconBlockEntity {
         return map;
     }
 
-    public Vec3f getBeamDirection() {
+    public Vector3f getBeamDirection() {
         return this.beamDirection;
     }
     public String getBeamDirectionName() {
@@ -61,7 +61,7 @@ public class OmniBeaconBlockEntity extends DecoBeaconBlockEntity {
     public Vec3i getBeamDirectionInt() { //:`(
         return new Vec3i(this.beamDirection.getX(),this.beamDirection.getY(),this.beamDirection.getZ());
     }
-    public void setBeamDirection(Vec3f beamDirection) {
+    public void setBeamDirection(Vector3f beamDirection) {
         this.beamDirection = beamDirection;
         this.bookSettings.put("direction",
                 Direction.fromVector(
@@ -83,7 +83,7 @@ public class OmniBeaconBlockEntity extends DecoBeaconBlockEntity {
         return new Vec3i(this.prevBeamDirection.getX(),this.prevBeamDirection.getY(),this.prevBeamDirection.getZ());
     }
     public void setPrevBeamDirection(Vec3i prevBeamDirection) {
-        this.prevBeamDirection = new Vec3f(prevBeamDirection.getX(),prevBeamDirection.getY(),prevBeamDirection.getZ());
+        this.prevBeamDirection = new Vector3f(prevBeamDirection.getX(),prevBeamDirection.getY(),prevBeamDirection.getZ());
     }
     public int getMaxBeamLength() {
         return maxBeamLength;
@@ -107,7 +107,7 @@ public class OmniBeaconBlockEntity extends DecoBeaconBlockEntity {
     }
     @Override
     protected void writeNbt(NbtCompound nbt) {
-        Vec3f beamDir = getBeamDirection();
+        Vector3f beamDir = getBeamDirection();
         nbt.putFloat("beamDirectionX",beamDir.getX());
         nbt.putFloat("beamDirectionY",beamDir.getY());
         nbt.putFloat("beamDirectionZ",beamDir.getZ());
@@ -118,7 +118,7 @@ public class OmniBeaconBlockEntity extends DecoBeaconBlockEntity {
     public void readNbt(NbtCompound nbt) {
         try {
             super.readNbt(nbt);
-            this.beamDirection = new Vec3f(nbt.getFloat("beamDirectionX"), nbt.getFloat("beamDirectionY"), nbt.getFloat("beamDirectionZ"));
+            this.beamDirection = new Vector3f(nbt.getFloat("beamDirectionX"), nbt.getFloat("beamDirectionY"), nbt.getFloat("beamDirectionZ"));
             this.maxBeamLength = nbt.getInt("maxBeamLength");//make sure all fields are initialized properly. this was missing and caused the game to freeze on "Saving worlds" without logs
 
             this.bookSettings.put("maxBeamLength", Integer.toString(this.maxBeamLength));

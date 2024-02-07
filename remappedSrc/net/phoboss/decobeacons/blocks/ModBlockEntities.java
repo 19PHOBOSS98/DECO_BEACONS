@@ -2,8 +2,8 @@ package net.phoboss.decobeacons.blocks;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
 import net.phoboss.decobeacons.DecoBeacons;
 import net.phoboss.decobeacons.blocks.decobeacon.DecoBeaconBlockEntity;
 import net.phoboss.decobeacons.blocks.omnibeacon.OmniBeaconBlockEntity;

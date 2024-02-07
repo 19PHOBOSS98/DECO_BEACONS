@@ -42,7 +42,7 @@ public class OmniBeaconBlockEntityRenderer implements BlockEntityRenderer<OmniBe
     }
 
     private static void renderBeam(
-            MatrixStack matrices, VertexConsumerProvider vertexConsumers, float tickDelta, long worldTime, float yOffset, float maxY, float[] color,Vec3f beamDirection
+            MatrixStack matrices, VertexConsumerProvider vertexConsumers, float tickDelta, long worldTime, float yOffset, float maxY, float[] color,Vector3f beamDirection
     ) {
         renderBeam(matrices, vertexConsumers, BEAM_TEXTURE, tickDelta, 1.0F, worldTime, yOffset, maxY, color, 0.2F, 0.25F,beamDirection);
     }
@@ -60,13 +60,13 @@ public class OmniBeaconBlockEntityRenderer implements BlockEntityRenderer<OmniBe
             float[] color,
             float innerRadius,
             float outerRadius,
-            Vec3f beamDirection
+            Vector3f beamDirection
     ) {
         float i = yOffset + maxY;
         matrices.push();
         matrices.translate(0.5, 0.5, 0.5);
-        //matrices.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(180.0F));
-        matrices.multiply(getQuatFrom2Vectors(new Vec3f(0,1,0), beamDirection));
+        //matrices.multiply(Vector3f.POSITIVE_X.getDegreesQuaternion(180.0F));
+        matrices.multiply(getQuatFrom2Vectors(new Vector3f(0,1,0), beamDirection));
         float f = (float)Math.floorMod(worldTime, 40) + tickDelta;
         float g = maxY < 0 ? f : -f;
         float h = MathHelper.fractionalPart(g * 0.2F - (float)MathHelper.floor(g * 0.1F));
@@ -75,7 +75,7 @@ public class OmniBeaconBlockEntityRenderer implements BlockEntityRenderer<OmniBe
         float l = color[2];
         matrices.push();
 
-        matrices.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(f * 2.25F - 45.0F));
+        matrices.multiply(Vector3f.POSITIVE_Y.getDegreesQuaternion(f * 2.25F - 45.0F));
 
         float m = 0.0F;
         float p = 0.0F;
@@ -240,16 +240,16 @@ public class OmniBeaconBlockEntityRenderer implements BlockEntityRenderer<OmniBe
         return 256;
     }
 
-    public static Quaternion getQuatFrom2Vectors(Vec3f fromVec,Vec3f toVec){
+    public static Quaternion getQuatFrom2Vectors(Vector3f fromVec,Vector3f toVec){
         Quaternion q;
-        Vec3f cp = fromVec;
+        Vector3f cp = fromVec;
         double dp = fromVec.dot(toVec);
 
         if (dp<-0.9999999) {//opposite direction
-            if(cp.equals(new Vec3f(0,1,0))){
-                return new Quaternion(new Vec3f(1,0,0), 180, true);
+            if(cp.equals(new Vector3f(0,1,0))){
+                return new Quaternion(new Vector3f(1,0,0), 180, true);
             }
-            cp.cross(new Vec3f(0,1,0));
+            cp.cross(new Vector3f(0,1,0));
             q = new Quaternion(cp, 180, true);
             q.normalize();
             return q;

@@ -18,12 +18,4 @@ public class DecoBeaconGhostBlock extends DecoBeaconBlock {
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
         return new DecoBeaconBlockEntity(pos,state,true);
     }
-/*
-    @Nullable
-    @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        return checkType(type, ModBlockEntities.DECO_BEACON.get(), DecoBeaconBlockEntity::tick);
-    }
-
- */
 }

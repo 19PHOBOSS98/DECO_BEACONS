@@ -60,7 +60,7 @@ public class DecoBeaconBlockEntityRenderer implements BlockEntityRenderer<DecoBe
         float k = color[1];
         float l = color[2];
         matrices.push();
-        matrices.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(f * 2.25F - 45.0F));
+        matrices.multiply(Vector3f.POSITIVE_Y.getDegreesQuaternion(f * 2.25F - 45.0F));
         float m = 0.0F;
         float p = 0.0F;
         float q = -innerRadius;

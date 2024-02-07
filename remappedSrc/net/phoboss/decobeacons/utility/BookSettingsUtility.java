@@ -10,7 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtList;
 import net.minecraft.sound.SoundEvents;
-import net.minecraft.text.TranslatableTextContent;
+import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3i;
@@ -90,7 +90,7 @@ public interface BookSettingsUtility {
 
         if(pagesNbt.isEmpty()){
             SpecialEffects.playSound(world, pos, SoundEvents.ENTITY_LIGHTNING_BOLT_THUNDER);
-            player.sendMessage(new TranslatableTextContent("empty_book_error_prompt"),false);
+            player.sendMessage(Text.translatable("empty_book_error_prompt"),false);
             return ActionResult.FAIL;
         }
         try {
