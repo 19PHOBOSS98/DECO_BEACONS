@@ -244,11 +244,16 @@ public class OmniBeaconBlockEntityRenderer implements BlockEntityRenderer<OmniBe
         return Vec3.atCenterOf(beaconBlockEntity.getBlockPos()).multiply(1.0, 0.0, 1.0).closerThan(vec3d.multiply(1.0, 0.0, 1.0), (double)this.getViewDistance());
     }
 
+    @Override
+    public boolean shouldRenderOffScreen(OmniBeaconBlockEntity pBlockEntity) {
+        return true;
+    }
 
     @Override
-    public int getViewDistance() {
-        return 256;
+    public boolean shouldRender(OmniBeaconBlockEntity pBlockEntity, Vec3 pCameraPos) {
+        return true;
     }
+
 
     public static Quaternion getQuatFrom2Vectors(Vector3f fromVec, Vector3f toVec){
         Quaternion q;
