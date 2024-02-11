@@ -20,7 +20,7 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'org.parchmentmc.librarian.forgegradle'
 apply plugin: 'org.spongepowered.mixin'
 
-version = '0.0.1-1.20.1'
+version = '0.0.1-1.20.1-Forge'
 group = 'net.phoboss.decobeacons' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'decobeacons'
 
@@ -173,9 +173,10 @@ dependencies {
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 
     //COMMENTOUT when running in server//
-    /*//translucent multi-textured blocks (ie slime, honey, deco-beacons) render weird
-    runtimeOnly fg.deobf("curse.maven:oculus-581495:5080444")
-    runtimeOnly fg.deobf("curse.maven:embeddium-908741:5077202")*/
+
+    //toggle on translucent face sorting on in oculus mod options
+    runtimeOnly fg.deobf("curse.maven:oculus-581495:5080444")//enable Video Settings>Advanced Tab>Translucent Face Sorting
+    runtimeOnly fg.deobf("curse.maven:embeddium-908741:5077202")
 
     runtimeOnly fg.deobf("curse.maven:minemaresurection-596719:4816846")
     runtimeOnly fg.deobf("curse.maven:cmdcam-251244:5004068")
