@@ -211,8 +211,7 @@ public class DecoBeaconBlockEntity extends BlockEntity {
         int curColorID = entity.getCurColorID();
 
         if(!world.isClient()){// note to self only update state properties in server-side
-            world.setBlockState(pos,state.with(Properties.LIT,isPowered),Block.NOTIFY_ALL);
-            world.setBlockState(pos,state.with(DecoBeaconBlock.COLOR,curColorID),Block.NOTIFY_ALL);
+            world.setBlockState(pos,state.with(Properties.LIT,isPowered).with(DecoBeaconBlock.COLOR,curColorID),Block.NOTIFY_ALL);
         }
 
         int i = pos.getX();
