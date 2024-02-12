@@ -111,7 +111,7 @@ public class DecoBeaconBlock extends BaseEntityBlock implements EntityBlock, Bea
                 blockEntity.setActiveLow(!blockEntity.isActiveLow());
                 return InteractionResult.SUCCESS;
 
-            }else if(mainHandItem == Items.COAL){
+            }else if(mainHandItem == Items.SAND){
                 blockEntity.setTransparent(!blockEntity.isTransparent());
                 return InteractionResult.SUCCESS;
 
