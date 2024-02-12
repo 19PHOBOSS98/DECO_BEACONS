@@ -11,6 +11,7 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
@@ -44,7 +45,7 @@ public class DecoBeacons
         eventBus.addListener(this::setupClient);
         MinecraftForge.EVENT_BUS.register(this);
     }
-    private void setupClient(final FMLCommonSetupEvent event)
+    private void setupClient(final FMLClientSetupEvent event)
     {
         ModRendering.registerAll();
     }
@@ -59,5 +60,6 @@ public class DecoBeacons
         public static void registerRenderers(final EntityRenderersEvent.RegisterRenderers event){
             ModRendering.registerBlockEntityRenderers(event);
         }
+
     }
 }
