@@ -239,17 +239,13 @@ public class OmniBeaconBlockEntityRenderer implements BlockEntityRenderer<OmniBe
                 .endVertex();
     }
 
-    public boolean rendersOutsideBoundingBox(OmniBeaconBlockEntity beaconBlockEntity) {
+    @Override
+    public boolean shouldRenderOffScreen(OmniBeaconBlockEntity pBlockEntity) {
         return true;
     }
-    public boolean isInRenderDistance(OmniBeaconBlockEntity beaconBlockEntity, Vec3 vec3d) {
-        return Vec3.atCenterOf(beaconBlockEntity.getBlockPos()).multiply(1.0, 0.0, 1.0).closerThan(vec3d.multiply(1.0, 0.0, 1.0), (double)this.getViewDistance());
-    }
-
 
     @Override
-    public int getViewDistance() {
-        return 256;
+    public boolean shouldRender(OmniBeaconBlockEntity pBlockEntity, Vec3 pCameraPos) {
+        return true;
     }
-
 }
