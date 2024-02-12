@@ -14,6 +14,7 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.phys.Vec3;
+import net.phoboss.decobeacons.blocks.omnibeacon.OmniBeaconBlockEntity;
 
 import java.util.List;
 
@@ -218,16 +219,14 @@ public class DecoBeaconBlockEntityRenderer implements BlockEntityRenderer<DecoBe
                 .endVertex();
     }
 
-    public boolean rendersOutsideBoundingBox(DecoBeaconBlockEntity beaconBlockEntity) {
+    @Override
+    public boolean shouldRenderOffScreen(DecoBeaconBlockEntity pBlockEntity) {
         return true;
-    }
-    public boolean isInRenderDistance(DecoBeaconBlockEntity beaconBlockEntity, Vec3 vec3d) {
-        return Vec3.atCenterOf(beaconBlockEntity.getBlockPos()).multiply(1.0, 0.0, 1.0).closerThan(vec3d.multiply(1.0, 0.0, 1.0), (double)this.getViewDistance());
     }
 
     @Override
-    public int getViewDistance() {
-        return 256;
+    public boolean shouldRender(DecoBeaconBlockEntity pBlockEntity, Vec3 pCameraPos) {
+        return true;
     }
 
 }
