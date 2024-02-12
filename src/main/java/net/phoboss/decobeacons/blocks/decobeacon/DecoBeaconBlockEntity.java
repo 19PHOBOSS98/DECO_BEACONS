@@ -214,8 +214,7 @@ public class DecoBeaconBlockEntity extends BlockEntity implements IForgeBlockEnt
         int curColorID = entity.getCurColorID();
 
         if(!world.isClientSide()){// note to self only update state properties in server-side
-            world.setBlock(pos,state.setValue(BlockStateProperties.LIT,isPowered),Block.UPDATE_ALL);
-            world.setBlock(pos,state.setValue(DecoBeaconBlock.COLOR,curColorID),Block.UPDATE_ALL);
+            world.setBlock(pos,state.setValue(DecoBeaconBlock.COLOR,curColorID).setValue(BlockStateProperties.LIT,isPowered),Block.UPDATE_ALL);
         }
 
         int i = pos.getX();
