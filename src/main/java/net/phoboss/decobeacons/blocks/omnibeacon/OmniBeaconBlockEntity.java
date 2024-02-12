@@ -154,8 +154,7 @@ public class OmniBeaconBlockEntity extends DecoBeaconBlockEntity implements IFor
 
 
         if(!world.isClientSide()){// note to self only update state properties in server-side
-            world.setBlock(beaconPos,beaconState.setValue(BlockStateProperties.LIT,isPowered), Block.UPDATE_ALL);
-            world.setBlock(beaconPos,beaconState.setValue(DecoBeaconBlock.COLOR,curColorID),Block.UPDATE_ALL);
+            world.setBlock(beaconPos,beaconState.setValue(DecoBeaconBlock.COLOR,curColorID).setValue(BlockStateProperties.LIT,isPowered),Block.UPDATE_ALL);
         }
 
         //if this beacon switched color or set direction changed then redo construction
