@@ -3,6 +3,7 @@ package net.phoboss.decobeacons.utility;
 import net.minecraft.core.BlockPos;
 
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -16,7 +17,7 @@ public interface ErrorResponse {
     static void onError(Level world,BlockPos pos,Player player,String field){
         if(!world.isClientSide()) {
             SpecialEffects.playSound(world, pos, SoundEvents.LIGHTNING_BOLT_THUNDER);
-            player.displayClientMessage(Component.literal(field), false);
+            player.displayClientMessage(new TextComponent(field), false);
         }
     }
 

@@ -15,7 +15,7 @@ import java.util.function.Supplier;
 
 public class ModBlockEntities {
 
-    public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES,DecoBeacons.MOD_ID);
+    public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITIES,DecoBeacons.MOD_ID);
 
     public static final RegistryObject<BlockEntityType<DecoBeaconBlockEntity>> DECO_BEACON = registerBlockEntities("deco_beacon",
             () ->   BlockEntityType.Builder.of(
