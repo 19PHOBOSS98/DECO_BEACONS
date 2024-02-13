@@ -3,7 +3,7 @@
 	"id": "decobeacons",
 	"version": "${version}",
 	"name": "DecoBeacons",
-	"description": "This is an example description! Tell everyone what your mod is about!",
+	"description": "Adds Decorative Beacons!",
 	"authors": [
 		"PHOBOSS"
 	],
@@ -11,7 +11,7 @@
 		"homepage": "https://fabricmc.net/",
 		"sources": "https://github.com/FabricMC/fabric-example-mod"
 	},
-	"license": "CC0-1.0",
+	"license": "LGPLv3",
 	"icon": "assets/decobeacons/icon.png",
 	"environment": "*",
 	"entrypoints": {
