@@ -12,7 +12,7 @@
 		"sources": "https://github.com/FabricMC/fabric-example-mod"
 	},
 	"license": "LGPLv3",
-	"icon": "assets/decobeacons/icon.png",
+	"icon": "decobeacons_icon.png",
 	"environment": "*",
 	"entrypoints": {
 		"main": [
