@@ -85,13 +85,5 @@ The following settings only work with omni beacons
 
 
 
-<div align="center">
-  <h1>BOOK COMMANDS</h1>
-  <p>You can use a book&quill to store decobeacon settings. R-Click a decobeacon with a book&quill to apply settings.</p>
-  
-</div>
-
-
-
 
 
