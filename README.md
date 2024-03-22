@@ -6,7 +6,7 @@
 
 <div align="center">
   <p>Adds decorative beacons</p>
-  <p>This is my test mod when I started learning about Minecraft modding before I started building <a href="https://github.com/19PHOBOSS98/Mirage/tree/1.18.2-forge">MIRAGE</a></p>
+  <p>This is my test mod when I started learning about Minecraft modding to prep building <a href="https://github.com/19PHOBOSS98/Mirage/tree/1.18.2-forge">MIRAGE</a></p>
   
 </div>
 
