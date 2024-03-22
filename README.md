@@ -46,13 +46,27 @@
       <p> Each beacon has a ghost variant. They work the same way with a few exceptions. Light beams from Ghost beacons pass thru blocks (except opaque beacons). As "ghosts" these blocks don't have collision letting you walk thru them. </p>
     <h3>Book Settings</h3>
       <p> We can write down beacon settings in a Book-&-Quill and apply it to a beacon by R-Click. </p>
+      <h4>General Settings:</h4>
+      <h4>OmniBeacon Exclusive Settings:</h4>
+        <p>The following settings only work with omni beacons</p>
+  <h5>direction</h5>
+  <p>sets the direction of the light beam</p>
+  <h5>maxBeamLength</h5>
+  <p>sets the max length of the light beam</p>
+      <h4>Examples:</h4>
+         <p align="center"> DECOBEACON SETTINGS:<br><img src="https://github.com/19PHOBOSS98/DECO_BEACONS/assets/37253663/21e23ce8-c932-4c8c-9263-b32326177540" alt="DECOBEACON SETTINGS" height="500"></p>
+      </br>
+          <p align="center"> OMNIBEACON SETTINGS:<br><img src="https://github.com/19PHOBOSS98/DECO_BEACONS/assets/37253663/0349913c-da2c-4fef-a00e-29cf505c4f49" alt="OMNIBEACON SETTINGS" height="500"></p>
+      </br>
 </div>
-dye
-sand
-redstone torch
-book&quill
+
 <div align="center">
   <h1>BOOK COMMANDS</h1>
   <p>You can use a book&quill to store decobeacon settings. R-Click a decobeacon with a book&quill to apply settings.</p>
   
 </div>
+
+
+
+
+
