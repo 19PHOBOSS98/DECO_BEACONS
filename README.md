@@ -44,21 +44,42 @@
       <p> DecoBeacon light beams can pass thru other decobeacons and change the beams color. R-clicking with a Sand block makes the surface abrasive and stops the light beam from passing thru. Applying sand to a ghost beacon doesn't stop any light beam from passing thru however it does stop the ghost beacon from affecting the light beam's color</p>
     <h3>GHOSTS</h3>
       <p> Each beacon has a ghost variant. They work the same way with a few exceptions. Light beams from Ghost beacons pass thru blocks (except opaque beacons). As "ghosts" these blocks don't have collision letting you walk thru them. </p>
-    <h3>Book Settings</h3>
-      <p> We can write down beacon settings in a Book-&-Quill and apply it to a beacon by R-Click. </p>
-      <h4>General Settings:</h4>
-      <h4>OmniBeacon Exclusive Settings:</h4>
-        <p>The following settings only work with omni beacons</p>
-  <h5>direction</h5>
-  <p>sets the direction of the light beam</p>
-  <h5>maxBeamLength</h5>
-  <p>sets the max length of the light beam</p>
-      <h4>Examples:</h4>
+</div>
+
+### BOOK SETTINGS
+
+We can write down beacon settings in a Book-&-Quill and apply it to a beacon by R-Clicking.
+Make sure to separate each setting with a comma "," and recheck what we type in.
+The beacon will "calmly" point out what we did wrong
+
+### General Settings:
+- ### activeLow:true/false
+  * if set to true, the beacon is "ACTIVE" when the redstone signal you give it is "LOW"
+- ### isTransparent:true/false
+  * if set to false, decobeacon light beams cannot pass thru this decobeacon... except if this decobeacon is a ghost variant.
+  * setting this to false on a ghost variant beacon stops the beacon from affecting the passing light beam's color 
+- ### color:white/orange/magenta/light_blue/yellow/lime/pink/gray/light_gray/cyan/purple/blue/brown/green/red/black
+  * set beacon color
+
+### OmniBeacon Exclusive Settings:
+The following settings only work with omni beacons
+
+- ### direction: north/south/east/west/up/down
+  * sets the direction of the light beam
+                
+- ### maxBeamLenght: integer
+  * sets the max length of the light beam
+
+
+<div align="left">
+      <h3>Examples:</h3>
          <p align="center"> DECOBEACON SETTINGS:<br><img src="https://github.com/19PHOBOSS98/DECO_BEACONS/assets/37253663/21e23ce8-c932-4c8c-9263-b32326177540" alt="DECOBEACON SETTINGS" height="500"></p>
       </br>
           <p align="center"> OMNIBEACON SETTINGS:<br><img src="https://github.com/19PHOBOSS98/DECO_BEACONS/assets/37253663/0349913c-da2c-4fef-a00e-29cf505c4f49" alt="OMNIBEACON SETTINGS" height="500"></p>
       </br>
 </div>
+
+
 
 <div align="center">
   <h1>BOOK COMMANDS</h1>
