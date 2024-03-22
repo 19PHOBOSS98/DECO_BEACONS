@@ -47,18 +47,18 @@
   <h2>FAKE BEACON</h2>
 </div>
 <div align="justify">
-  <h1 align="center">HOW TO USE</h1>
-    <h3>ON/OFF</h3>
+  <h1 align="center">HOW TO</h1>
+    <h3>TURN ON/OFF</h3>
       <p> give it a redstone signal to activate the beacon. Toggle ActiveLow mode by R-Clicking it with a redstone torch </p>
-    <h3>PICK COLOR</h3>
+    <h3>SET COLOR</h3>
       <p> Cycle thru the colors by R-Clicking the beacon with an empty hand. Shift R-Clicking it cycles thru the colors in reverse. R-Clicking it with a dye changes the color. It does not consume the dye. </p>
-    <h3>LIGHTBEAM OPACITY</h3>
+    <h3>SET BEACON TRANSPARENCY</h3>
       <p> DecoBeacon light beams can pass thru other decobeacons and change the beams color. R-clicking with a Sand block makes the surface abrasive and stops the light beam from passing thru. Applying sand to a ghost beacon doesn't stop any light beam from passing thru however it does stop the ghost beacon from affecting the light beam's color</p>
-    <h3>GHOSTS</h3>
+    <h3>USE GHOSTS</h3>
       <p> Each beacon has a ghost variant. They work the same way with a few exceptions. Light beams from Ghost beacons pass thru blocks (except opaque beacons). As "ghosts" these blocks don't have collision letting you walk thru them. </p>
 </div>
 
-### BOOK SETTINGS
+### USE BOOK SETTINGS
 
 We can write down beacon settings in a Book-&-Quill and apply it to a beacon by R-Clicking.
 Make sure to separate each setting with a comma "," and recheck what we type in.
