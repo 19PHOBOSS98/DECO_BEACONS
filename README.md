@@ -1,6 +1,6 @@
 <div align="center">
   <h1>DECO BEACONS</h1>
-  <img src="https://github.com/19PHOBOSS98/DECO_BEACONS/assets/37253663/71ce350d-d828-468e-a4d4-5d6a4bcb0e7a" alt="DECO BEACONS" height="500">
+  <picture><img src="https://github.com/19PHOBOSS98/DECO_BEACONS/assets/37253663/71ce350d-d828-468e-a4d4-5d6a4bcb0e7a" alt="DECO BEACONS" height="500"></picture>
   <h1></h1>
 </div>
 
@@ -15,7 +15,7 @@
 <div align="center">
   <h1>BLOCKS</h1>
   
-  <img src="https://github.com/19PHOBOSS98/DECO_BEACONS/assets/37253663/2a588f58-f141-4607-abad-4d78185d36e1" alt="DECO BEACON" height="200">
+  <picture><img src="https://github.com/19PHOBOSS98/DECO_BEACONS/assets/37253663/2a588f58-f141-4607-abad-4d78185d36e1" alt="DECO BEACON" height="200"></picture>
   </br>
   <span>Lights up when given redstone signal</span>
   </br>
@@ -23,7 +23,7 @@
   </br>
   <h2>DECO BEACON</h2>
   
-  <img src="https://github.com/19PHOBOSS98/DECO_BEACONS/assets/37253663/2a8f7238-4c9d-47c4-bae1-60c467382df7" alt="GHOST DECO BEACON" height="200">
+  <picture><img src="https://github.com/19PHOBOSS98/DECO_BEACONS/assets/37253663/2a8f7238-4c9d-47c4-bae1-60c467382df7" alt="GHOST DECO BEACON" height="200"></picture>
   </br>
   <span>Beam passes thru blocks</span>
   </br>
@@ -31,14 +31,14 @@
   </br>
   <h2>GHOST DECO BEACON</h2>
   
-  <img src="https://github.com/19PHOBOSS98/DECO_BEACONS/assets/37253663/2f857792-c49f-4360-af3e-39274912d479" alt="OMNI BEACON" height="200">
+  <picture><img src="https://github.com/19PHOBOSS98/DECO_BEACONS/assets/37253663/2f857792-c49f-4360-af3e-39274912d479" alt="OMNI BEACON" height="200"></picture>
   </br>
   <span>Beam can be redirected</span>
   </br>
   <span>also has ghost variant</span>
   <h2>OMNI BEACON</h2>
  
-  <img src="https://github.com/19PHOBOSS98/DECO_BEACONS/assets/37253663/d62bda3b-c02f-4d61-b6a2-1e96f19304b4" alt="FAKE BEACON" height="200">
+  <picture><img src="https://github.com/19PHOBOSS98/DECO_BEACONS/assets/37253663/d62bda3b-c02f-4d61-b6a2-1e96f19304b4" alt="FAKE BEACON" height="200"></picture>
   </br>
   <span>Looks like an actual beacon...</span>
   </br>
@@ -85,19 +85,19 @@ The following settings only work with omni beacons
 
 <div align="left">
       <h3>Examples:</h3>
-         <p align="center"> DECOBEACON SETTINGS:<br><img src="https://github.com/19PHOBOSS98/DECO_BEACONS/assets/37253663/21e23ce8-c932-4c8c-9263-b32326177540" alt="DECOBEACON SETTINGS" height="500"></p>
+         <p align="center"> DECOBEACON SETTINGS:<br><picture><img src="https://github.com/19PHOBOSS98/DECO_BEACONS/assets/37253663/21e23ce8-c932-4c8c-9263-b32326177540" alt="DECOBEACON SETTINGS" height="500"></picture></p>
       </br>
-          <p align="center"> OMNIBEACON SETTINGS:<br><img src="https://github.com/19PHOBOSS98/DECO_BEACONS/assets/37253663/0349913c-da2c-4fef-a00e-29cf505c4f49" alt="OMNIBEACON SETTINGS" height="500"></p>
+          <p align="center"> OMNIBEACON SETTINGS:<br><picture><img src="https://github.com/19PHOBOSS98/DECO_BEACONS/assets/37253663/0349913c-da2c-4fef-a00e-29cf505c4f49" alt="OMNIBEACON SETTINGS" height="500"></picture></p>
       </br>
 </div>
 
 
 <div align="center">
-  <img src="https://github.com/19PHOBOSS98/Mirage/assets/37253663/13752a40-b78b-4fd7-8433-c0f8ebf0710f" alt="divider180">
-  <img src="https://github.com/19PHOBOSS98/Mirage/assets/37253663/2f062bd9-d8cd-4425-8bcb-00096ee885e6" alt="krakenemblem">
+  <picture><img src="https://github.com/19PHOBOSS98/Mirage/assets/37253663/13752a40-b78b-4fd7-8433-c0f8ebf0710f" alt="divider180"></picture>
+  <picture><img src="https://github.com/19PHOBOSS98/Mirage/assets/37253663/2f062bd9-d8cd-4425-8bcb-00096ee885e6" alt="krakenemblem"></picture>
   <a href="https://www.youtube.com/channel/UCmdUkIr-zCxO9CvOLxeSzlg"><img src="https://github.com/19PHOBOSS98/Mirage/assets/37253663/9c560bb7-8bb3-4ee6-97bb-4cd32c046bea" alt="yt"></a>
   
-  <img src="https://github.com/19PHOBOSS98/Mirage/assets/37253663/dd711759-589a-4317-a82f-671ab45baf45" alt="divider">
+  <picture><img src="https://github.com/19PHOBOSS98/Mirage/assets/37253663/dd711759-589a-4317-a82f-671ab45baf45" alt="divider"></picture>
 </div>
 
 
