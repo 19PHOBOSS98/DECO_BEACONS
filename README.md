@@ -27,7 +27,7 @@
   </br>
   <span>Beam passes thru blocks</span>
   </br>
-  <span>Has no collision</span>
+  <span>Block has no collision itself</span>
   </br>
   <h2>GHOST DECO BEACON</h2>
   
