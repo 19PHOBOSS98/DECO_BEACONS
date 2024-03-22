@@ -14,31 +14,39 @@
 
 <div align="center">
   <h1>BLOCKS</h1>
+  
   <img src="https://github.com/19PHOBOSS98/DECO_BEACONS/assets/37253663/2a588f58-f141-4607-abad-4d78185d36e1" alt="DECO BEACON" height="200">
   </br>
   <span>Lights up when given redstone signal</span>
   </br>
   <span>Beam collides with block</span>
   </br>
+  <h2>DECO BEACON</h2>
+  
   <img src="https://github.com/19PHOBOSS98/DECO_BEACONS/assets/37253663/2a8f7238-4c9d-47c4-bae1-60c467382df7" alt="GHOST DECO BEACON" height="200">
   </br>
   <span>Beam passes thru blocks</span>
   </br>
   <span>Has no collision</span>
   </br>
-  <img src="https://github.com/19PHOBOSS98/DECO_BEACONS/assets/37253663/2f857792-c49f-4360-af3e-39274912d479" alt="FAKE BEACON" height="200">
+  <h2>GHOST DECO BEACON</h2>
+  
+  <img src="https://github.com/19PHOBOSS98/DECO_BEACONS/assets/37253663/2f857792-c49f-4360-af3e-39274912d479" alt="OMNI BEACON" height="200">
+  </br>
+  <span>Beam can be redirected</span>
+  </br>
+  <span>also has ghost variant</span>
+  <h2>OMNI BEACON</h2>
+ 
+  <img src="https://github.com/19PHOBOSS98/DECO_BEACONS/assets/37253663/d62bda3b-c02f-4d61-b6a2-1e96f19304b4" alt="FAKE BEACON" height="200">
   </br>
   <span>Looks like an actual beacon...</span>
   </br>
   <span>Also has ghost variant</span>
   </br>
-  <img src="https://github.com/19PHOBOSS98/DECO_BEACONS/assets/37253663/d62bda3b-c02f-4d61-b6a2-1e96f19304b4" alt="OMNI BEACON" height="200">
-  </br>
-  <span>Beam can be redirected</span>
-  </br>
-  <span>also has ghost variant</span>
+  <h2>FAKE BEACON</h2>
 </div>
-<div align="left">
+<div align="justify">
   <h1 align="center">HOW TO USE</h1>
     <h3>ON/OFF</h3>
       <p> give it a redstone signal to activate the beacon. Toggle ActiveLow mode by R-Clicking it with a redstone torch </p>
