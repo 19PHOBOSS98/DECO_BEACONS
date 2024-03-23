@@ -9,11 +9,6 @@
   <p>This is my test mod when I started learning about Minecraft modding to prep building <a href="https://github.com/19PHOBOSS98/Mirage/tree/1.18.2-forge">MIRAGE</a></p>
   
 </div>
-![Screenshot 2024-03-23 015448](https://github.com/19PHOBOSS98/DECO_BEACONS/assets/37253663/c60041ba-bcc2-4019-bf14-69a1d7dbc992)
-![Screenshot 2024-03-23 015501](https://github.com/19PHOBOSS98/DECO_BEACONS/assets/37253663/16d4ced4-6d10-47a0-b42e-3af682f2d0ef)
-
-
-
 
 <div align="center">
   <h1>BLOCKS</h1>
