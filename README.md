@@ -9,6 +9,17 @@
 </div>
 
 <div align="center">
+  <picture><img src="https://github.com/19PHOBOSS98/Mirage/assets/37253663/13752a40-b78b-4fd7-8433-c0f8ebf0710f" alt="divider180"></picture>
+  <a href="https://modrinth.com/mod/decobeacons"><picture><img alt="Modrinth Downloads" src="https://img.shields.io/modrinth/dt/MGOVPD2J?logo=modrinth&color=gold"></picture></a>
+  <picture><img alt="Modrinth Version" src="https://img.shields.io/modrinth/v/MGOVPD2J"></picture>
+
+
+  <!--img src="https://img.shields.io/modrinth/dt/fabric-api?logo=modrinth&label=&suffix=%20&style=flat&color=242629&labelColor=5ca424&logoColor=1c1c1c" alt="Modrinth"-->
+  
+  <picture><img src="https://github.com/19PHOBOSS98/Mirage/assets/37253663/dd711759-589a-4317-a82f-671ab45baf45" alt="divider"></picture>
+</div>
+
+<div align="center">
   <h1>BLOCKS</h1>
   
   <picture><img src="https://github.com/19PHOBOSS98/DECO_BEACONS/assets/37253663/2a588f58-f141-4607-abad-4d78185d36e1" alt="DECO BEACON" height="200"></picture>
