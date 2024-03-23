@@ -1,26 +1,41 @@
+
+
 <div align="center">
-  <h1>DECO BEACONS</h1>
+  <h3>DECO BEACONS</h3>
+  
+<picture><img src="https://github.com/19PHOBOSS98/Mirage/assets/37253663/dd711759-589a-4317-a82f-671ab45baf45" alt="divider"></picture>
+<picture><img src="https://github.com/19PHOBOSS98/Mirage/assets/37253663/13752a40-b78b-4fd7-8433-c0f8ebf0710f" alt="divider180"></picture>
+  
   <picture><img src="https://github.com/19PHOBOSS98/DECO_BEACONS/assets/37253663/71ce350d-d828-468e-a4d4-5d6a4bcb0e7a" alt="DECO BEACONS" height="500"></picture>
-  <h1></h1>
 </div>
+
+<picture><img src="https://github.com/19PHOBOSS98/Mirage/assets/37253663/dd711759-589a-4317-a82f-671ab45baf45" alt="divider"></picture>
+<picture><img src="https://github.com/19PHOBOSS98/Mirage/assets/37253663/13752a40-b78b-4fd7-8433-c0f8ebf0710f" alt="divider180"></picture>
 
 <div align="center">
   <p>Adds decorative beacons</p>  
 </div>
 
+<picture><img src="https://github.com/19PHOBOSS98/Mirage/assets/37253663/dd711759-589a-4317-a82f-671ab45baf45" alt="divider"></picture>
+<picture><img src="https://github.com/19PHOBOSS98/Mirage/assets/37253663/13752a40-b78b-4fd7-8433-c0f8ebf0710f" alt="divider180"></picture>
+
 <div align="center">
-  <picture><img src="https://github.com/19PHOBOSS98/Mirage/assets/37253663/13752a40-b78b-4fd7-8433-c0f8ebf0710f" alt="divider180"></picture>
+  
   <a href="https://modrinth.com/mod/decobeacons"><picture><img alt="Modrinth Downloads" src="https://img.shields.io/modrinth/dt/MGOVPD2J?logo=modrinth&color=gold"></picture></a>
   <picture><img alt="Modrinth Version" src="https://img.shields.io/modrinth/v/MGOVPD2J"></picture>
 
 
   <!--img src="https://img.shields.io/modrinth/dt/fabric-api?logo=modrinth&label=&suffix=%20&style=flat&color=242629&labelColor=5ca424&logoColor=1c1c1c" alt="Modrinth"-->
   
-  <picture><img src="https://github.com/19PHOBOSS98/Mirage/assets/37253663/dd711759-589a-4317-a82f-671ab45baf45" alt="divider"></picture>
+  
 </div>
 
+<picture><img src="https://github.com/19PHOBOSS98/Mirage/assets/37253663/dd711759-589a-4317-a82f-671ab45baf45" alt="divider"></picture>
+<picture><img src="https://github.com/19PHOBOSS98/Mirage/assets/37253663/13752a40-b78b-4fd7-8433-c0f8ebf0710f" alt="divider180"></picture>
+
 <div align="center">
-  <h1>BLOCKS</h1>
+  
+<h3>DECO BEACON</h3>
   
   <picture><img src="https://github.com/19PHOBOSS98/DECO_BEACONS/assets/37253663/2a588f58-f141-4607-abad-4d78185d36e1" alt="DECO BEACON" height="200"></picture>
   </br>
@@ -29,8 +44,13 @@
   <span>Beam collides with block</span>
   </br>
   <picture><img src="https://github.com/19PHOBOSS98/DECO_BEACONS/assets/37253663/49c9725e-73a8-40e3-8801-cb1884cfbc31" alt="DECO BEACON RECIPE" height="200"></picture>
-  <h2>DECO BEACON</h2>
   
+
+<picture><img src="https://github.com/19PHOBOSS98/Mirage/assets/37253663/dd711759-589a-4317-a82f-671ab45baf45" alt="divider"></picture>
+<picture><img src="https://github.com/19PHOBOSS98/Mirage/assets/37253663/13752a40-b78b-4fd7-8433-c0f8ebf0710f" alt="divider180"></picture>
+
+<h3>GHOST DECO BEACON</h3>
+
   <picture><img src="https://github.com/19PHOBOSS98/DECO_BEACONS/assets/37253663/2a8f7238-4c9d-47c4-bae1-60c467382df7" alt="GHOST DECO BEACON" height="200"></picture>
   </br>
   <span>Beam passes thru blocks</span>
@@ -38,8 +58,12 @@
   <span>Block has no collision itself</span>
   </br>
   <picture><img src="https://github.com/19PHOBOSS98/DECO_BEACONS/assets/37253663/43e2d7f5-c49f-4856-a8b6-3a6c63f283e9" alt="GHOST DECO BEACON RECIPE" height="200"></picture>
-  <h2>GHOST DECO BEACON</h2>
   
+
+<picture><img src="https://github.com/19PHOBOSS98/Mirage/assets/37253663/dd711759-589a-4317-a82f-671ab45baf45" alt="divider"></picture>
+<picture><img src="https://github.com/19PHOBOSS98/Mirage/assets/37253663/13752a40-b78b-4fd7-8433-c0f8ebf0710f" alt="divider180"></picture>
+
+  <h3>OMNI BEACON</h3>
   <picture><img src="https://github.com/19PHOBOSS98/DECO_BEACONS/assets/37253663/2f857792-c49f-4360-af3e-39274912d479" alt="OMNI BEACON" height="200"></picture>
   </br>
   <span>Beam can be redirected</span>
@@ -49,8 +73,12 @@
   <span>also has ghost variant</span>
   </br>
   <picture><img src="https://github.com/19PHOBOSS98/DECO_BEACONS/assets/37253663/16d4ced4-6d10-47a0-b42e-3af682f2d0ef" alt="OMNI BEACON GHOST RECIPE" height="200"></picture>
-  <h2>OMNI BEACON</h2>
- 
+  
+
+<picture><img src="https://github.com/19PHOBOSS98/Mirage/assets/37253663/dd711759-589a-4317-a82f-671ab45baf45" alt="divider"></picture>
+<picture><img src="https://github.com/19PHOBOSS98/Mirage/assets/37253663/13752a40-b78b-4fd7-8433-c0f8ebf0710f" alt="divider180"></picture>
+
+  <h3>FAKE BEACON</h3>
   <picture><img src="https://github.com/19PHOBOSS98/DECO_BEACONS/assets/37253663/d62bda3b-c02f-4d61-b6a2-1e96f19304b4" alt="FAKE BEACON" height="200"></picture>
   </br>
   <span>Looks like an actual beacon...</span>
@@ -60,10 +88,14 @@
   <span>Also has ghost variant</span>
   </br>
   <picture><img src="https://github.com/19PHOBOSS98/DECO_BEACONS/assets/37253663/c60041ba-bcc2-4019-bf14-69a1d7dbc992" alt="FAKE BEACON GHOST RECIPE" height="200"></picture>
-  <h2>FAKE BEACON</h2>
+  
 </div>
+
+<picture><img src="https://github.com/19PHOBOSS98/Mirage/assets/37253663/dd711759-589a-4317-a82f-671ab45baf45" alt="divider"></picture>
+<picture><img src="https://github.com/19PHOBOSS98/Mirage/assets/37253663/13752a40-b78b-4fd7-8433-c0f8ebf0710f" alt="divider180"></picture>
+
 <div align="justify">
-  <h1 align="center">HOW TO</h1>
+  <h3 align="center">HOW TO</h3>
     <h3>TURN ON/OFF</h3>
       <p> give it a redstone signal to activate the beacon. Toggle ActiveLow mode by R-Clicking it with a redstone torch </p>
     <h3>SET COLOR</h3>
@@ -107,6 +139,7 @@ The following settings only work with omni beacons
       </br>
 </div>
 
+<picture><img src="https://github.com/19PHOBOSS98/Mirage/assets/37253663/dd711759-589a-4317-a82f-671ab45baf45" alt="divider"></picture>
 
 <div align="center">
   <picture><img src="https://github.com/19PHOBOSS98/Mirage/assets/37253663/13752a40-b78b-4fd7-8433-c0f8ebf0710f" alt="divider180"></picture>
