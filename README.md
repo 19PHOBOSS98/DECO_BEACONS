@@ -2,18 +2,11 @@
 
 <div align="center">
   <h3>DECO BEACONS</h3>
-  
+  <p>Adds decorative beacons</p>  
 <picture><img src="https://github.com/19PHOBOSS98/Mirage/assets/37253663/dd711759-589a-4317-a82f-671ab45baf45" alt="divider"></picture>
 <picture><img src="https://github.com/19PHOBOSS98/Mirage/assets/37253663/13752a40-b78b-4fd7-8433-c0f8ebf0710f" alt="divider180"></picture>
   
   <picture><img src="https://github.com/19PHOBOSS98/DECO_BEACONS/assets/37253663/71ce350d-d828-468e-a4d4-5d6a4bcb0e7a" alt="DECO BEACONS" height="500"></picture>
-</div>
-
-<picture><img src="https://github.com/19PHOBOSS98/Mirage/assets/37253663/dd711759-589a-4317-a82f-671ab45baf45" alt="divider"></picture>
-<picture><img src="https://github.com/19PHOBOSS98/Mirage/assets/37253663/13752a40-b78b-4fd7-8433-c0f8ebf0710f" alt="divider180"></picture>
-
-<div align="center">
-  <p>Adds decorative beacons</p>  
 </div>
 
 <picture><img src="https://github.com/19PHOBOSS98/Mirage/assets/37253663/dd711759-589a-4317-a82f-671ab45baf45" alt="divider"></picture>
