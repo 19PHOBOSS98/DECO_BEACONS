@@ -9,6 +9,9 @@
   <p>This is my test mod when I started learning about Minecraft modding to prep building <a href="https://github.com/19PHOBOSS98/Mirage/tree/1.18.2-forge">MIRAGE</a></p>
   
 </div>
+![Screenshot 2024-03-23 015448](https://github.com/19PHOBOSS98/DECO_BEACONS/assets/37253663/c60041ba-bcc2-4019-bf14-69a1d7dbc992)
+![Screenshot 2024-03-23 015501](https://github.com/19PHOBOSS98/DECO_BEACONS/assets/37253663/16d4ced4-6d10-47a0-b42e-3af682f2d0ef)
+
 
 
 
@@ -21,6 +24,7 @@
   </br>
   <span>Beam collides with block</span>
   </br>
+  <picture><img src="https://github.com/19PHOBOSS98/DECO_BEACONS/assets/37253663/49c9725e-73a8-40e3-8801-cb1884cfbc31" alt="DECO BEACON RECIPE" height="200"></picture>
   <h2>DECO BEACON</h2>
   
   <picture><img src="https://github.com/19PHOBOSS98/DECO_BEACONS/assets/37253663/2a8f7238-4c9d-47c4-bae1-60c467382df7" alt="GHOST DECO BEACON" height="200"></picture>
@@ -29,21 +33,29 @@
   </br>
   <span>Block has no collision itself</span>
   </br>
+  <picture><img src="https://github.com/19PHOBOSS98/DECO_BEACONS/assets/37253663/43e2d7f5-c49f-4856-a8b6-3a6c63f283e9" alt="GHOST DECO BEACON RECIPE" height="200"></picture>
   <h2>GHOST DECO BEACON</h2>
   
   <picture><img src="https://github.com/19PHOBOSS98/DECO_BEACONS/assets/37253663/2f857792-c49f-4360-af3e-39274912d479" alt="OMNI BEACON" height="200"></picture>
   </br>
   <span>Beam can be redirected</span>
   </br>
+  <picture><img src="https://github.com/19PHOBOSS98/DECO_BEACONS/assets/37253663/2c58a7c9-acdb-4300-9507-96862c2d05a5" alt="OMNI BEACON RECIPE" height="200"></picture>
+  </br>
   <span>also has ghost variant</span>
+  </br>
+  <picture><img src="https://github.com/19PHOBOSS98/DECO_BEACONS/assets/37253663/16d4ced4-6d10-47a0-b42e-3af682f2d0ef" alt="OMNI BEACON GHOST RECIPE" height="200"></picture>
   <h2>OMNI BEACON</h2>
  
   <picture><img src="https://github.com/19PHOBOSS98/DECO_BEACONS/assets/37253663/d62bda3b-c02f-4d61-b6a2-1e96f19304b4" alt="FAKE BEACON" height="200"></picture>
   </br>
   <span>Looks like an actual beacon...</span>
   </br>
+  <picture><img src="https://github.com/19PHOBOSS98/DECO_BEACONS/assets/37253663/2eea078c-7dc3-467a-91b0-8c7ccfad55c4" alt="FAKE BEACON RECIPE" height="200"></picture>
+  </br>
   <span>Also has ghost variant</span>
   </br>
+  <picture><img src="https://github.com/19PHOBOSS98/DECO_BEACONS/assets/37253663/c60041ba-bcc2-4019-bf14-69a1d7dbc992" alt="FAKE BEACON GHOST RECIPE" height="200"></picture>
   <h2>FAKE BEACON</h2>
 </div>
 <div align="justify">
